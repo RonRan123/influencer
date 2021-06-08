@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { Button, Container, TextField } from "@material-ui/core";
-import Post from "./PostCard"
+import PostCard from "./PostCard"
 import '../css/Blog.css'
+import Masonry from 'react-masonry-css'
 
 function Blog(){
     const [posts, setPosts] = useState([]);
@@ -21,6 +22,13 @@ function Blog(){
     useEffect(() =>{
         getPhotos();
     }, [])
+
+    const breakpoints = {
+        default: 3,
+        1100: 2,
+        700: 1
+    }
+
     return (
         <Container>
             <h1>Camille's Corner</h1>
@@ -28,39 +36,18 @@ function Blog(){
             <TextField id="search-keyword" label="Enter Search" onChange={e => setInput(e.target.value)} defaultValue="canyon"/>
             <Button onClick={() => getPhotos()}>Search</Button>
             <br></br>
-            {posts && <ImageList images={posts} />}
+            <Masonry
+                breakpointCols={breakpoints}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+            >
+                {posts && posts.map( (image) => <PostCard key={image.id} image={image} />)}
+            </Masonry>
+            
         </Container>
     );
 }
 
-const ImageList = (props) => {
-    // console.log(props.images);
-    const images = props.images.map( (image) => {
-        return <ImageCard key={image.id} image={image} />;
-    })
-    return <div className='image-list'>{images}</div>;
-}
 
-const ImageCard = (props) => {
-    const imageRef = React.createRef();
-    const [spans, setSpans] = useState(0);
-    useEffect(() => {
-        imageRef.current.addEventListener("load", changeSpans);
-    })
-    const changeSpans = () => {
-        const height = imageRef.current.clientHeight;
-        const s = Math.ceil(height/10);
-        setSpans(s);
-    }
-    return (
-        <div style={{gridRowEnd: `span ${spans}`}}>
-            <img
-                ref={imageRef}
-                src={props.image.urls.small}
-                alt={props.image.description}
-            />
-        </div>
-    )
-}
 
 export default Blog;

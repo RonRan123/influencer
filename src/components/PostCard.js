@@ -1,9 +1,17 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 
-function PostCard(){
+function PostCard({info, image}){
     return(
-        <Typography component='h5'>This is some text</Typography>
+        <div key={image.id} className="masonry-item" >
+            <img 
+                src={image.urls.small}
+                alt={image.description}
+            />
+            <div>
+                <p>Title</p>
+            </div>
+        </div>
     )
 }
 
