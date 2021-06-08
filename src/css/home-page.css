@@ -1,0 +1,70 @@
+:root {
+  --off-white-color: #f7f1f0;
+  --grey-blue-color: #a9b7c0;
+  --minty-color: #c7d8c6;
+  --light-color: #efd9c1;
+  --powder-color: #cccbc6;
+  --martel-font: "Martel", serif;
+}
+
+/* Navigation Bar and its elements */
+h1 {
+  text-align: center;
+  font-family: var(--martel-font);
+  font-weight: bolder;
+  font-size: 45px;
+}
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 900px;
+  margin: auto;
+  color: black;
+  font-family: var(--martel-font);
+  border: solid var(--grey-blue-color);
+  border-width: 0px 0px 2px 0px;
+}
+.navbutton-group {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+.navbutton--border {
+  border: solid var(--grey-blue-color);
+  border-width: 2px 2px 0px 2px;
+  border-radius: 5px 5px 0px 0px;
+  background-color: var(--grey-blue-color);
+}
+.navbutton-label {
+  font-size: 15px;
+  padding: 0px 15px 0px 15px;
+  font-family: var(--martel-font);
+  font-weight: bold;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-bar__form {
+  background-color: var(--powder-color);
+  padding-left: 10px;
+  border-radius: 10px;
+}
+.social-icon {
+  width: 25px;
+  padding: 0 5px 0 10px;
+}
+.social-icon:hover {
+  cursor: pointer;
+}
+
+/* Featured Blog Section */
+
+/* Replace with grid */
+.featured-blogs {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
