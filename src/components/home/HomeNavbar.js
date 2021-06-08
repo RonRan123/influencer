@@ -9,26 +9,34 @@ import {
     IconButton 
 }from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
+import {
+    useHistory
+} from "react-router-dom";
 /**
  * Navigation bar for Home, Blog, Forum, and Shop.
  * This is where routing is handled.
  * @returns 
  */
 function HomeNavbar() {
+    const history = useHistory()
+
+    const handleClick = (path) =>{
+        history.push(path)
+    }
     return (
         <div className="navbar">
             <div className="navbutton-group">
                 <div className="navbutton--border">
-                    <Button classes={{label:"navbutton-label"}}>Home</Button>
+                    <Button onClick={()=>handleClick("/")} classes={{label:"navbutton-label"}}>Home</Button>
                 </div>
                 <div className="navbutton">
-                    <Button classes={{label:"navbutton-label"}}>Blog</Button>
+                    <Button onClick={()=>handleClick("/blog")}  classes={{label:"navbutton-label"}}>Blog</Button>
                 </div>
                 <div className="navbutton">
-                    <Button classes={{label:"navbutton-label"}}>Forum</Button>
+                    <Button onClick={()=>handleClick("/forum")} classes={{label:"navbutton-label"}}>Forum</Button>
                 </div>
                 <div className="navbutton">
-                    <Button classes={{label:"navbutton-label"}}>Shop</Button>
+                    <Button onClick={()=>handleClick("/shop")} classes={{label:"navbutton-label"}}>Shop</Button>
                 </div>
         
             </div>
