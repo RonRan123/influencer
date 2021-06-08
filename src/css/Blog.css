@@ -29,3 +29,34 @@
   .masonry-item:hover {
       opacity:0.5;
   }
+  .item-title {
+    position: relative;
+    width: 500px;
+    left: 0;
+    top: 120px;
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    z-index: 1;
+    transition: top .5s ease;
+  }
+
+.post-info {
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    top: 50%;
+    padding: 0 15px;
+    transition: all .2s ease-out;
+    transform: translateY(-60%);
+    visibility: hidden;
+    opacity: 0;
+}
+
+.post-info:hover {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-50%);
+}
