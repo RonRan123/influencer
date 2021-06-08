@@ -1,5 +1,6 @@
 import React from 'react'
-import FeaturedBlogs from './FeaturedBlogs'
+import FeaturedGrid from './FeaturedGrid'
+import NavigationDrawer from './NavigationDrawer'
 import FBLogo from '../../icons/facebook-logo.svg'
 import InstaLogo from '../../icons/insta-logo.svg'
 import TwitterLogo from '../../icons/twitter-logo.svg'
@@ -35,6 +36,9 @@ function HomePage() {
             <h1>
                 Camille's Corner
             </h1>
+            <div className="menu-button">
+                    <NavigationDrawer/>
+                </div>
             <div className="navbar">
                 <div className="navbutton-group">
                     <div className="navbutton--border">
@@ -63,7 +67,7 @@ function HomePage() {
 
                 <Button classes={{label:"navbutton-label"}}>Login</Button>
             </div>
-            <FeaturedBlogs/>
+            <FeaturedGrid/>
 
         </div>
     )

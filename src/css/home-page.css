@@ -25,11 +25,20 @@ h1 {
   border: solid var(--grey-blue-color);
   border-width: 0px 0px 2px 0px;
 }
+.menu-button {
+  display: none;
+  justify-content: flex-end;
+  align-items: center;
+  border: solid var(--grey-blue-color);
+  border-width: 0px 0px 2px 0px;
+}
+
 .navbutton-group {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-grow: 1;
 }
+
 .navbutton--border {
   border: solid var(--grey-blue-color);
   border-width: 2px 2px 0px 2px;
@@ -38,9 +47,33 @@ h1 {
 }
 .navbutton-label {
   font-size: 15px;
-  padding: 0px 15px 0px 15px;
+  padding: 0px 10px 0px 10px;
   font-family: var(--martel-font);
   font-weight: bold;
+}
+@media (max-width: 900px) {
+  /* .menu-button {
+    display: block;
+  } */
+  .navbutton-label {
+    padding: 0px 2px 0px 2px;
+  }
+  .navbutton-group {
+    justify-content: flex-start;
+    flex-grow: 0;
+  }
+  .navbar {
+    padding-left: 10px;
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 700px) {
+  .navbar {
+    display: none;
+  }
+  .menu-button {
+    display: flex;
+  }
 }
 .search-bar {
   display: flex;
@@ -54,7 +87,7 @@ h1 {
 }
 .social-icon {
   width: 25px;
-  padding: 0 5px 0 10px;
+  padding: 0 5px 0 5px;
 }
 .social-icon:hover {
   cursor: pointer;
@@ -64,7 +97,50 @@ h1 {
 
 /* Replace with grid */
 .featured-blogs {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 450px, 450px;
+  grid-auto-rows: 257px;
+  width: 900px;
+  gap: 10px;
+  margin: auto;
+}
+.featured-container--long {
+  padding-top: 10px;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  margin: 0;
+}
+.featured-container--short {
+  padding-top: 10px;
+  grid-column-start: 2;
+  margin: 0;
+}
+
+.featured-img--long {
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 445px;
+  margin: 0;
+}
+.featured-img--short {
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 445px;
+  margin: 0;
+}
+h2 {
+  margin: 0;
+  padding: 0;
+  font-family: var(--martel-font);
+}
+p {
+  font-family: var(--martel-font);
+  background-color: var(--minty-color);
+  border-radius: 10px;
+  margin: 0;
+  margin-top: 10px;
+  height: 115px;
+  font-weight: bold;
+  padding: 10px;
+  font-size: 14px;
 }
