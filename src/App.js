@@ -1,9 +1,11 @@
 import './App.css';
-import ShopItems from './Components/ShopItems';
+import Blog from './components/Blog'
+
 function App() {
   return (
     <div className="App">
-      <ShopItems/>
+      <Blog />
+
     </div>
   );
 }
