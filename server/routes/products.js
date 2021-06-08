@@ -32,5 +32,17 @@ router.delete("/delete", async (req, res) => {
     res.send("Got a DELETE request for products");
   });  
 
+router.put("/update", async (req, res) => {
+    const { doc_id, description, image, price, sizing, title, ...rest } = req.body;
+  
+    const resp = await db.collection("products").doc(doc_id).update({
+      title: title,
+      sizing: sizing,
+      price: price,
+      image: image,
+      description: description
+    });
+    res.send("Got a PUT request to update a product");
+  });
 
 module.exports = router;

@@ -32,4 +32,17 @@ router.delete("/delete", async (req, res) => {
     console.log("From blog-post, deleted: ", doc_id);
     res.send("Got a DELETE request");
   });
+
+router.put("/update", async (req, res) => {
+    const { doc_id, title, date, image, content, likeCount, ...rest } = req.body;
+  
+    const resp = await db.collection("blog-posts").doc(doc_id).update({
+      title: title,
+      date: date,
+      image: image,
+      content: content,
+      likeCount: likeCount
+    });
+    res.send("Got a PUT request to update blog post");
+  });
 module.exports = router;
