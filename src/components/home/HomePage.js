@@ -1,8 +1,16 @@
 import React from 'react'
 import FeaturedGrid from './FeaturedGrid'
 import HomeNavbar from './HomeNavbar'
+import ShopItems from '../ShopItems'
 import NavigationDrawer from './NavigationDrawer'
+import Blog from '../Blog'
 import '../../css/home-page.css'
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+  } from "react-router-dom";
 
 //testing
 import ForumList from '../forum/ForumList'
@@ -25,7 +33,7 @@ function HomePage() {
 
     //use clsx to manage button look when selected
     return (
-        <div>
+        <Router>
             <h1>
                 Camille's Corner
             </h1>
@@ -33,9 +41,22 @@ function HomePage() {
             <div className="menu-button">
                 <NavigationDrawer/>
             </div>
-            <ForumList/>
-            {/* <FeaturedGrid/> */}
-        </div>
+
+            <Switch>
+                <Route exact path="/">
+                    <FeaturedGrid/>
+                </Route>
+                <Route path="/forum">
+                   <ForumList/> 
+                </Route>
+                <Route path ="/blog">
+                    <Blog/>
+                </Route>
+                <Route path ="/shop">
+                    <ShopItems/>
+                </Route>
+            </Switch>
+        </Router>
     )
 }
 

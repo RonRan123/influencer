@@ -30,8 +30,7 @@ function Blog(){
     }
 
     return (
-        <Container>
-            <h1>Camille's Corner</h1>
+        <Container >
             {/* {posts && posts.map(p => <Post info={p} />)} */}
             <TextField id="search-keyword" label="Enter Search" onChange={e => setInput(e.target.value)} defaultValue="canyon"/>
             <Button onClick={() => getPhotos()}>Search</Button>
