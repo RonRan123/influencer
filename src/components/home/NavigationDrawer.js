@@ -25,6 +25,11 @@ import{
 //   },
 // });
 
+/**
+ * Dropdown navigation drawer that appears when the screen width is under 700px
+ * This has the same navigation functionality as the HomeNavbar but is mobile friendly
+ * @returns 
+ */
 export default function NavigationDrawer() {
 //   const classes = useStyles();
   const [open, setOpen] = useState(false)

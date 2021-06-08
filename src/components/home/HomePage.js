@@ -3,8 +3,9 @@ import FeaturedGrid from './FeaturedGrid'
 import HomeNavbar from './HomeNavbar'
 import NavigationDrawer from './NavigationDrawer'
 import '../../css/home-page.css'
-//To do:
-//Use media queries to set breakpoints for full screen navbar view
+
+//testing
+import ForumList from '../forum/ForumList'
 
 /**
  * Home/Landing page containing navigation bar,
@@ -32,8 +33,8 @@ function HomePage() {
             <div className="menu-button">
                 <NavigationDrawer/>
             </div>
-
-            <FeaturedGrid/>
+            <ForumList/>
+            {/* <FeaturedGrid/> */}
         </div>
     )
 }

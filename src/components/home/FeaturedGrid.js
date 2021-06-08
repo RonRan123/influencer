@@ -7,7 +7,13 @@ const blurbData = `Camille is a world-famous model who has only ever wanted to b
 even though her mother has always pushed her to become a superstar. Now, she's a college dropout,
 working as a social media influencer to make the world a more positive place.`
 
-function FeaturedGrid({blogPosts}) {
+/**
+ * Grid featuring the most current blog post, featured merchandise, and a short bio
+ * of Camille. 
+ * @param {*} blogPost The most current blog post 
+ * @returns 
+ */
+function FeaturedGrid({blogPost}) {
 
     //temporary function to get random pics
     const randomURL = 'https://picsum.photos/450/550'

@@ -9,7 +9,11 @@ import {
     IconButton 
 }from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
-
+/**
+ * Navigation bar for Home, Blog, Forum, and Shop.
+ * This is where routing is handled.
+ * @returns 
+ */
 function HomeNavbar() {
     return (
         <div className="navbar">
