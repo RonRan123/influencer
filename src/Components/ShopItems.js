@@ -9,50 +9,58 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import ShopCard from './ShopCard';
+import ShopDialog from './ShopDialog';
 
 const useStyles = makeStyles({
     root: {
       maxWidth: 345,
+      flexGrow: 1,
     },
     media: {
       height: 300,
     },
+    paper: {
+        height: 140,
+        width: 100,
+    },
   });
 export default function ShopItems(){
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const [selectedItem, setSelectedItem] = React.useState();
+
+    const handleClickOpen = () => {
+        setOpen(true);
+        setSelectedItem();
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleAdd = (id) => {
+        console.log(id);
+    }
+
+//mapping through the shopping data 
+//putting the fields into different parts of a MUI card
+//wrapping it in a grid  
+    return(           
+        
+                    <Grid container> 
+                        {shopData && shopData.map(item => <div><ShopCard id={item.title} info={item} /> <Button onClick={handleAdd(item.title)}>Add to Cart</Button></div>)}
+                        
+                    </Grid>
+                               
+    );
+
     
-    return(
-        <div>
-            <Grid container>
-            {shopData.map((item) => {
-                return (
-                    <Card className={classes.root}>
-                        <CardActionArea>
-                            <CardMedia
-                            className={classes.media}
-                            image = {item.image}
-                            title={item.title}
-                            />
-                            <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {item.title}
-                            </Typography>
-                            <Typography variant="h6" color="textSecondary" component="p">
-                                {item.description}
-                            </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Typography size="body2" color="primary" component="h5">
-                                {item.price}
-                            </Typography>
-                        </CardActions>
-                    </Card>
-                );
-            })}
-            </Grid>
-        </div>
-    )
 
 }

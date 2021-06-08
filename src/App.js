@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import ShopPage from './Components/Shop';
-import ShopItems from './Components/ShopItems'
+import ShopDialog from './Components/ShopDialog';
+import ShopItems from './Components/ShopItems';
 function App() {
   return (
     <div className="App">

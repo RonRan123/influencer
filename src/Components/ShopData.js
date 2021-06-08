@@ -26,6 +26,13 @@ const shopData = [
         description: "Cotton, Made in Italy, Black, Designer",
         title: 'Classic Gucci Shirt',
         price:'$480.00'
+    },
+    {
+        image: 'https://cdn-images.farfetch-contents.com/12/41/63/18/12416318_11308944_1000.jpg',
+        sizing: 'L',
+        description: "Cotton, Made in Italy, Black, Designer",
+        title: 'Random Shirt',
+        price:'$480.00'
     }
 ]
 
