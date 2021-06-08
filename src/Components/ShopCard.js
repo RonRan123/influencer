@@ -1,5 +1,4 @@
-    import React from 'react';
-import shopData from "./ShopData";
+import React from 'react';
 import { Card } from '@material-ui/core';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
