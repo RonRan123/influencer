@@ -13,8 +13,6 @@ router.get("/get", async (req, res) => {
 
 router.post("/add", async (req, res) => {
     const { title, date, content, image, likeCount, comments, ...rest } = req.body;
-    // console.log(averageRating);
-    const students = [];
     const resp = await db.collection("blog-posts").add({
       title,
       date,
@@ -29,9 +27,9 @@ router.post("/add", async (req, res) => {
   });
 
 router.delete("/delete", async (req, res) => {
-    const { doc, ...rest } = req.body;
-    const resp = await db.collection("blog-posts").doc(doc).delete();
-    console.log("From blog-post, deleted: ", doc);
+    const { doc_id, ...rest } = req.body;
+    const resp = await db.collection("blog-posts").doc(doc_id).delete();
+    console.log("From blog-post, deleted: ", doc_id);
     res.send("Got a DELETE request");
   });
 module.exports = router;
