@@ -18,47 +18,41 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import ShopCard from './ShopCard';
 import ShopDialog from './ShopDialog';
 
-const useStyles = makeStyles({
-    root: {
-      maxWidth: 345,
-      flexGrow: 1,
-    },
-    media: {
-      height: 300,
-    },
-    paper: {
-        height: 140,
-        width: 100,
-    },
-  });
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 export default function ShopItems(){
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [selectedItem, setSelectedItem] = React.useState();
 
-    const handleClickOpen = () => {
-        setOpen(true);
-        setSelectedItem();
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const [cart, setCart] = React.useState([]);
 
     const handleAdd = (id) => {
-        console.log(id);
+        setSelectedItem(id);
+        setCart(selectedItem);
     }
 
 //mapping through the shopping data 
 //putting the fields into different parts of a MUI card
 //wrapping it in a grid  
     return(           
-        
-                    <Grid container> 
-                        {shopData && shopData.map(item => <div><ShopCard id={item.title} info={item} /> <Button onClick={handleAdd(item.title)}>Add to Cart</Button></div>)}
+            <div>
+                    <Grid container className={classes.paper} spacing={2}> 
+                        {shopData && shopData.map((item, index) => <div><ShopCard id={index} info={item} /> <Button onClick={() => handleAdd(item.title)}>Add to Cart</Button></div>)}
                         
                     </Grid>
-                               
+                <div>
+                    Cart = {cart}
+                </div>
+            </div>              
     );
 
     

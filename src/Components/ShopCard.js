@@ -1,4 +1,4 @@
-import React from 'react';
+    import React from 'react';
 import shopData from "./ShopData";
 import { Card } from '@material-ui/core';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -16,10 +16,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: 345,
       flexGrow: 1,
+      alignItems: 'center',
+      paddingLeft: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
     },
     media: {
       height: 300,
@@ -28,7 +31,11 @@ const useStyles = makeStyles({
         height: 140,
         width: 100,
     },
-  });
+    controls: {
+        display: 'flex',
+        
+    },
+  }));
 function ShopCard({info}){
     const classes = useStyles();
     
