@@ -1,31 +1,21 @@
 import React from "react";
 import shopData from "./ShopData";
-import { Card } from '@material-ui/core';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import ShopCard from './ShopCard';
-import ShopDialog from './ShopDialog';
+import Paper from '@material-ui/core/Paper';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+    padding: theme.spacing(3),
+    color: theme.palette.text.secondary, // change to CSS
+    alignItems: 'center',
+
   },
 }));
 export default function ShopItems(){
@@ -44,17 +34,15 @@ export default function ShopItems(){
 //putting the fields into different parts of a MUI card
 //wrapping it in a grid  
     return(           
+        <div className={classes.root}>
+            <Grid container spacing={1} justify="center"> 
+                {shopData && shopData.map((item, index) => <div> <Paper className={classes.paper}> <ShopCard id={index} info={item}/> <div><br></br></div><Button variant="contained" onClick={() => handleAdd(item.title)}>Add to Cart</Button></Paper><br></br></div>)}
+            </Grid>
+            <br></br>
             <div>
-                    <Grid container className={classes.paper} spacing={2}> 
-                        {shopData && shopData.map((item, index) => <div><ShopCard id={index} info={item} /> <Button onClick={() => handleAdd(item.title)}>Add to Cart</Button></div>)}
-                        
-                    </Grid>
-                <div>
-                    Cart = {cart}
-                </div>
-            </div>              
-    );
-
-    
+                <h2>Cart = {cart} </h2>
+            </div>  
+        </div>     
+    );  
 
 }
