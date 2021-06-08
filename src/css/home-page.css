@@ -13,6 +13,8 @@ h1 {
   font-family: var(--martel-font);
   font-weight: bolder;
   font-size: 45px;
+  margin: 0;
+  margin-top: 10px;
 }
 .navbar {
   display: flex;
@@ -127,7 +129,48 @@ h1 {
   border-radius: 10px;
   width: 445px;
   margin: 0;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
 }
+@keyframes fadeOut {
+  from {
+    filter: brightness(100%);
+  }
+  to {
+    filter: brightness(50%);
+  }
+}
+@keyframes fadeIn {
+  from {
+    filter: brightness(50%);
+  }
+  to {
+    filter: brightness(100%);
+  }
+}
+.featured-img--short:hover {
+  animation-name: fadeOut;
+  animation-duration: 0.5s;
+  filter: brightness(50%);
+}
+/* @media (hover: hover) {
+  .overlaid-text:hover {
+    display: block;
+  }
+}
+.featured-img--short:hover .overlaid-text,
+.featured-img--short.hover .overlaid-text {
+  display: block;
+}
+.overlaid-text {
+  display: none;
+  position: fixed;
+  font-family: var(--martel-font);
+  font-weight: bold;
+  font-size: 30px;
+  color: rgb(255, 255, 255, 1);
+  background-color: red;
+} */
 h2 {
   margin: 0;
   padding: 0;
