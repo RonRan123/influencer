@@ -24,20 +24,53 @@ export default function ShopItems(){
     const classes = useStyles();
     const [selectedItem, setSelectedItem] = React.useState();
 
-    const [cart, setCart] = React.useState([]);
-
+    
+    const [cart1, setCart1] = React.useState();
     const handleAdd = (id) => {
         setSelectedItem(id);
-        setCart(selectedItem);
+        addProducts(id);
+        
     }
 
-    useEffect(() => {
-        fetch('http://localhost:8080/routes/products/get')
+    const getProducts = async () => {
+        fetch('http://localhost:8080/products/get')
         .then(async (res) => {
             const results = await res.json();
+            setProducts(results);
         })
-    })
+    };
 
+    const addProducts = async (data) => {
+        fetch('http://localhost:8080/cart/add', 
+        {
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({
+                productID: data
+            }),
+        })
+        .then(res => res.json());
+    }
+
+
+
+
+    const getCart = async () => {
+        fetch('http://localhost:8080/cart/get')
+        .then(async (res) => {
+            const results = await res.json();
+            setCart1(results);
+            
+        })  
+    };
+
+   useEffect( () => {
+       getProducts();
+       getCart();
+   }, [])
 //mapping through the shopping data 
 //putting the fields into different parts of a MUI card
 //wrapping it in a grid  
@@ -45,11 +78,11 @@ export default function ShopItems(){
         <div className = 'background'>         
         <div className={classes.root}>
             <Grid container spacing={1} justify="center"> 
-                {shopData && shopData.map((item, index) => <div> <Paper className={classes.paper}> <ShopCard id={index} info={item}/> <div><br></br></div><Button className='cart-button' variant='contained' onClick={() => handleAdd(item.title)}>Add to Cart</Button></Paper><br></br></div>)}
+                {products && products.map((item, index) => <div> <Paper className={classes.paper}> <ShopCard id={index} info={item}/> <div><br></br></div><Button className='cart-button' variant='contained' onClick={() => handleAdd(item.doc_id)}>Add to Cart</Button></Paper><br></br></div>)}
             </Grid>
             <br></br>
             <div>
-                <h2>Cart = {cart} </h2>
+                <h2>Cart = {cart1 && cart1.map((product, index) => <div>{product.productID}</div> )} </h2>
             </div>  
         </div>  
         </div>    
