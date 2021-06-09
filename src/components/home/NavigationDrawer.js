@@ -46,26 +46,26 @@ export default function NavigationDrawer() {
       onKeyDown={toggleDrawer()}
     >
       <List>
-        <ListItem style={listItemStyle} button>
+        <ListItem onClick={()=>{history.push(home)}} style={listItemStyle} button>
             <ListItemIcon><HomeIcon/></ListItemIcon>
             <ListItemText primary={"Home"} />
         </ListItem>
         
-        <ListItem style={listItemStyle} button>
+        <ListItem onClick={()=>{history.push(blog)}} style={listItemStyle} button>
             <ListItemIcon><BookIcon/></ListItemIcon>
             <ListItemText primary={"Blog"} />
         </ListItem>
         
-        <ListItem style={listItemStyle} button>
+        <ListItem onClick={()=>{history.push(forum)}} style={listItemStyle} button>
             <ListItemIcon><ForumIcon/></ListItemIcon>
             <ListItemText primary={"Forum"} />
         </ListItem>
         
-        <ListItem style={listItemStyle} button>
+        <ListItem onClick={()=>{history.push(shop)}} style={listItemStyle} button>
             <ListItemIcon><LocalMallIcon/></ListItemIcon>
             <ListItemText primary={"Shop"} />
         </ListItem>
-        <ListItem style={listItemStyle} button>
+        <ListItem onClick={()=>{console.log("To be done")}} style={listItemStyle} button>
             <ListItemIcon><AccountCircleIcon/></ListItemIcon>
             <ListItemText primary={"Login"} />
         </ListItem>

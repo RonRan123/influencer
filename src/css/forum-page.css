@@ -9,7 +9,7 @@
 /* Forum Post List */
 .forum-frame {
   padding: 10px 0px 10px 0px;
-  width: 900px;
+  max-width: 900px;
   margin: auto;
 }
 
@@ -46,7 +46,7 @@ p.stats {
 
 /* Individual Forum View */
 .forum-view {
-  width: 900px;
+  max-width: 900px;
   margin: auto;
   padding-top: 10px;
   padding-bottom: 10px;
