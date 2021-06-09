@@ -15,7 +15,9 @@
 
 /* Forum Item */
 .forum-item-container {
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 5px;
 }
 h3 {
   font-family: var(--martel-font);
@@ -106,6 +108,15 @@ h3 {
 }
 
 /* Forum CRUD buttons */
+.edit-delete-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--powder-color);
+  border-radius: 0px 5px 5px 0px;
+  flex-grow: 1;
+}
 .forum-crud-container {
   max-width: 900px;
   margin: auto;

@@ -13,14 +13,15 @@ import {
   } from "react-router-dom";
 import { CircularProgress } from '@material-ui/core'
 import axios from 'axios'
-//testing
-function ForumList({forumData}) {
+/**
+ * List of all forum posts. New forum posts can be started by users. 
+ * Edit and delete permissions will be reserved for the admin of the site.
+ * @returns 
+ */
+function ForumList() {
     const {path, url} = useRouteMatch()
     const [allThreads, setAllThreads] = useState([])
-    const progressStyle={
-        width:"100%",
-        height:"100%"
-    }
+
     useEffect(()=>{
         fetchAllThreads()
     }, [])
@@ -39,7 +40,7 @@ function ForumList({forumData}) {
         <> 
             <Switch>
                 <Route exact path={path}>
-                    <ForumCRUD/>
+                    <ForumCRUD setAllThreads={setAllThreads}/>
           
                     {allThreads.length > 0
                         ?
@@ -52,7 +53,7 @@ function ForumList({forumData}) {
                         </div>
                         :
                         <div className="circular-progress">
-                            <CircularProgress style={progressStyle}/>
+                            <CircularProgress style={{width:"100%", height:"100%"}}/>
                         </div>
                     }
                 </Route>

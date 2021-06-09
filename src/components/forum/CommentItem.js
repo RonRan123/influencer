@@ -39,9 +39,9 @@ function CommentItem({commentItem}) {
         <div className="comment-item-container">       
             <Card>
                 <CardContent classes={{root:"card-root"}} >
-                    <p className="forum">{commentItem.text}</p>
+                    <p className="forum">{commentItem.content}</p>
                     <Divider/>
-                    <p className="forum">By: <b>{commentItem.user.name}</b> on <b>{commentItem.date}</b></p>
+                    <p className="forum">By: <b>{commentItem.user}</b> on <b>{commentItem.date}</b></p>
                     <p className="stats">
                        <IconButton onClick={handleLike} style={iconButtonStyle}>
                            <ThumbUpAltIcon />

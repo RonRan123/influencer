@@ -6,7 +6,12 @@ import {
     ButtonGroup,
     Input
 } from '@material-ui/core'
-function ForumCrud() {
+/**
+ * Responsible for Create, Update, and Delete operations pertaining
+ * to the forum posts
+ * @returns 
+ */
+function ForumCrud({setAllThreads}) {
     const [open, setOpen] = useState(true)
     const inputStyle={
         padding:"5px",
@@ -37,6 +42,7 @@ function ForumCrud() {
         const dateFormat = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}` 
         const forumObj = { title: threadTitle, date: dateFormat, user:"Dummy", content:null}
         AddForum(forumObj)
+        setAllThreads(allThreads=>[forumObj, ...allThreads])
         //account info to get user name.
     }
 

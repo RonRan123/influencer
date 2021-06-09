@@ -11,6 +11,21 @@ router.get("/get", async (req, res) => {
     res.json(comments);
 });
 
+router.get("/getFromForum", async(req, res)=>{
+    try{
+        const forumId = req.query.forumId
+        const commentsFiltered = await db.collection("comments").where('postID', '==', forumId).get()
+        const commentsList = []
+        commentsFiltered.forEach((comment)=>{
+            commentsList.push({...comment.data(), doc_id:comment.id})
+        })
+        res.json(commentsList)
+    }catch(err){
+        console.log("Error in getFromForum: ", err)
+        res.sendStatus(500)
+    }
+})
+
 router.post("/add", async (req, res) => {
     const { content, date, dislikes, likes, postID, user, ...rest } = req.body;
     const resp = await db.collection("comments").add({
