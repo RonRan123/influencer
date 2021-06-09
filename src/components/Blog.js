@@ -7,7 +7,9 @@ import Masonry from 'react-masonry-css'
 function Blog(){
     const [posts, setPosts] = useState([]);
     const [input, setInput] = useState("canyon");
-    const getPhotos = async () => {
+    const [random, setRandom] = useState(false);
+
+    const getSomePhotos = async () => {
         // For some reason, function doesn't work when I add search in the URl
         const url = new URL('https://api.unsplash.com/search/photos');
         url.searchParams.append('client_id', process.env.REACT_APP_access_key);
@@ -18,9 +20,18 @@ function Blog(){
             .then(resp => resp.json())
             .then(resp => setPosts(resp.results))
             .then(resp => resp);
+        setRandom(true);
     }
+
+    const getMyPhotos = async () => {
+        fetch('/blog/get')
+            .then(resp => resp.json())
+            .then(resp => setPosts(resp));
+    }
+
     useEffect(() =>{
-        getPhotos();
+        // getSomePhotos();
+        getMyPhotos();
     }, [])
 
     const breakpoints = {
@@ -28,19 +39,20 @@ function Blog(){
         1100: 2,
         700: 1
     }
-
+    console.log(posts)
     return (
         <Container >
             {/* {posts && posts.map(p => <Post info={p} />)} */}
             <TextField id="search-keyword" label="Enter Search" onChange={e => setInput(e.target.value)} defaultValue="canyon"/>
-            <Button onClick={() => getPhotos()}>Search</Button>
+            <Button onClick={() => getSomePhotos()}>Search</Button>
             <br></br>
             <Masonry
                 breakpointCols={breakpoints}
                 className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column"
             >
-                {posts && posts.map( (image) => <PostCard key={image.id} image={image} />)}
+                
+            {posts && random?posts.map( (image) => <PostCard key={image.id} image={image} />):posts.map( (post) => <PostCard key={post.doc_id} image={post.image} />)}
             </Masonry>
             
         </Container>
