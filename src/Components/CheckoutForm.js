@@ -38,9 +38,11 @@ class CheckoutForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <CardElement />
         <br></br>
-        <Button variant="contained" color = "primary" type="submit" disabled={!stripe}>
-          Click Here To Place Order
-        </Button>
+        {/* <Button variant="contained" color = "primary" type="submit" disabled={!stripe}> */}
+        <button type="submit" disabled={!stripe}>
+            Pay        
+        </button>
+        {/* </Button> */}
       </form>
     );
   }
