@@ -1,6 +1,7 @@
 import React from 'react'
 import ForumItem from './ForumItem'
 import ForumView from './ForumView'
+import ForumCRUD from './ForumCRUD'
 import '../../css/forum-page.css'
 import {
     Switch,
@@ -44,6 +45,7 @@ function ForumList({forumData}) {
         <> 
             <Switch>
                 <Route exact path={path}>
+                    <ForumCRUD/>
                     <div className="forum-frame">
                         {
                             forumItems.map((forumObj)=>{

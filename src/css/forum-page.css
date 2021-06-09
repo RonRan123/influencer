@@ -104,3 +104,61 @@ h3 {
 .comment-spacer-bottom {
   height: 500px;
 }
+
+/* Forum CRUD buttons */
+.forum-crud-container {
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.forum-crud-button {
+  font-family: var(--martel-font);
+  font-weight: bold;
+  background-color: var(--powder-color);
+  padding: 5px;
+  border-radius: 5px;
+}
+@keyframes threadOpen {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 140px;
+  }
+}
+@keyframes threadClose {
+  from {
+    height: 140px;
+  }
+  to {
+    height: 0px;
+  }
+}
+.forum-input {
+  height: 140px;
+  width: 500px;
+  overflow: hidden;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--powder-color);
+  border-radius: 5px;
+  animation-name: threadOpen;
+  animation-duration: 0.5s;
+}
+.forum-input-closing {
+  height: 0px;
+  animation-name: threadClose;
+  animation-duration: 0.5s;
+}
+.forum-input-textarea {
+  background-color: var(--powder-color);
+  border-radius: 5px;
+  width: 100%;
+}
+.forum-input-textarea__inputarea {
+  padding: 5px;
+}
