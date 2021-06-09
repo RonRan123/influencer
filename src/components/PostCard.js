@@ -2,9 +2,14 @@ import { Typography, Button } from '@material-ui/core';
 import React from 'react';
 
 function PostCard({info}){
+    const openPost = () => {
+        console.log(info.title);
+        // alert(post.doc_id);
+    }
+
     return(
         // On click should take you to the post
-        <div key={info.title} className="masonry-item" >
+        <div key={info.title} className="masonry-item" onClick={openPost}>
             <img 
                 width="400"
                 src={info.image}
