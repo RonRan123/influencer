@@ -12,9 +12,9 @@ router.get("/get", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-    const { productID } = req.body;
+    const { title, price } = req.body;
     const resp = await db.collection("cart").add({
-      productID
+      title, price
     });
 
     console.log("added document to cart with ID: " , resp.id);
