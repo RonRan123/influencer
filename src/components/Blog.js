@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Button, Container, TextField } from "@material-ui/core";
 import PostCard from "./PostCard"
+import ImageCard from "./ImageCard"
 import '../css/Blog.css'
 import Masonry from 'react-masonry-css'
 
@@ -9,8 +10,8 @@ function Blog(){
     const [input, setInput] = useState("canyon");
     const [random, setRandom] = useState(false);
 
+    //Will retrieve random photos from the API for testing
     const getSomePhotos = async () => {
-        // For some reason, function doesn't work when I add search in the URl
         const url = new URL('https://api.unsplash.com/search/photos');
         url.searchParams.append('client_id', process.env.REACT_APP_access_key);
         url.searchParams.append('query', input);
@@ -43,8 +44,8 @@ function Blog(){
     return (
         <Container >
             {/* {posts && posts.map(p => <Post info={p} />)} */}
-            <TextField id="search-keyword" label="Enter Search" onChange={e => setInput(e.target.value)} defaultValue="canyon"/>
-            <Button onClick={() => getSomePhotos()}>Search</Button>
+            {/* <TextField id="search-keyword" label="Enter Search" onChange={e => setInput(e.target.value)} defaultValue="canyon"/> */}
+            {/* <Button onClick={() => getSomePhotos()}>Search</Button> */}
             <br></br>
             <Masonry
                 breakpointCols={breakpoints}
@@ -52,7 +53,7 @@ function Blog(){
                 columnClassName="my-masonry-grid_column"
             >
                 
-            {posts && random?posts.map( (image) => <PostCard key={image.id} image={image} />):posts.map( (post) => <PostCard key={post.doc_id} image={post.image} />)}
+            {posts && random?posts.map( (image) => <ImageCard key={image.id} image={image} />):posts.map( (post) => <PostCard key={post.doc_id} info={post} />)}
             </Masonry>
             
         </Container>

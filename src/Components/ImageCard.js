@@ -1,14 +1,14 @@
 import { Typography, Button } from '@material-ui/core';
 import React from 'react';
 
-function PostCard({info}){
+function ImageCard({info, image}){
+    console.log(image.urls.small);
     return(
         // On click should take you to the post
-        <div key={info.title} className="masonry-item" >
+        <div key={image.id} className="masonry-item" >
             <img 
-                width="400"
-                src={info.image}
-                alt={info.title}
+                src={image.urls.small}
+                alt={image.description}
             />
             {/* <div className="post-info">
                 <Button variant="contained">Show Post</Button>
@@ -18,4 +18,4 @@ function PostCard({info}){
     )
 }
 
-export default PostCard;
+export default ImageCard;
