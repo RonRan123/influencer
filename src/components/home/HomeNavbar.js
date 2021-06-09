@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import FBLogo from '../../icons/facebook-logo.svg'
-import InstaLogo from '../../icons/insta-logo.svg'
-import TwitterLogo from '../../icons/twitter-logo.svg'
 import '../../css/home-page.css'
 import {
     Button,
@@ -22,23 +19,6 @@ import { home, blog, forum, shop } from './routerPaths'
 function HomeNavbar() {
     const history = useHistory()
     const [navSelector, setNavSelector] = useState({home:true, blog:false, forum:false, shop:false})
-
-    // const handleClick = (path) =>{
-    //     history.push(path)
-    //     switch(path){
-    //         case home:
-    //             setNavSelector()
-    //             break
-    //         case blog:
-    //             break
-    //         case forum:
-    //             break
-    //         case shop:
-    //             break
-    //         default:
-    //             return
-    //     }
-    // }
     const handleClick= (e)=>{
         const selectorName = e.currentTarget.name
         const navSelectorNone = {home:false, blog:false, forum:false, shop:false}
@@ -83,10 +63,7 @@ function HomeNavbar() {
                 </IconButton>
                 <Input disableUnderline={true} classes={{root:"search-bar__form"}} id="search-input" placeholder={"Search"}/>
             </div>
-            <img onClick={()=>{console.log("fb link")}} className="social-icon" src={FBLogo}/>
-            <img className="social-icon" src={InstaLogo}/>
-            <img className="social-icon" src={TwitterLogo}/>
-
+  
             <Button classes={{label:"navbutton-label"}}>Login</Button>
         </div>
     )

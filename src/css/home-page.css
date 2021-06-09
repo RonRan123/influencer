@@ -196,3 +196,14 @@ p {
   padding: 10px;
   font-size: 14px;
 }
+
+/* Bottom elements */
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--light-color);
+  height: 50px;
+}

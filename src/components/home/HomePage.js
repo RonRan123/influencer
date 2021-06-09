@@ -1,6 +1,7 @@
 import React from 'react'
 import FeaturedGrid from './FeaturedGrid'
 import HomeNavbar from './HomeNavbar'
+import Footer from './Footer'
 import ShopItems from '../ShopItems'
 import NavigationDrawer from './NavigationDrawer'
 import Blog from '../Blog'
@@ -58,6 +59,8 @@ function HomePage() {
                     <ShopItems/>
                 </Route>
             </Switch>
+            
+            <Footer/>
         </Router>
     )
 }
