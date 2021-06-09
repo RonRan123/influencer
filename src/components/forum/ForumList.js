@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ForumItem from './ForumItem'
 import ForumView from './ForumView'
 import ForumCRUD from './ForumCRUD'
@@ -11,51 +11,53 @@ import {
     useParams,
     useHistory
   } from "react-router-dom";
+import { CircularProgress } from '@material-ui/core'
+import axios from 'axios'
 //testing
-const forumItems =[
-    { title:'A lot of famous recipes are claimed to be made with love, but what’s a dish that’s probably made with hatred?',
-        author:'camomile123',
-        date:'6/8/2021',
-        id:"1",
-    },
-    { title:'A lot of famous recipes are claimed to be made with love, but what’s a dish that’s probably made with hatred?',
-    author:'camomile123',
-    date:'6/8/2021',
-    id:"2",
-    },
-    { title:'A lot of famous recipes are claimed to be made with love, but what’s a dish that’s probably made with hatred?',
-    author:'camomile123',
-    date:'6/8/2021',
-    id:"3",
-    },
-    { title:'A lot of famous recipes are claimed to be made with love, but what’s a dish that’s probably made with hatred?',
-    author:'camomile123',
-    date:'6/8/2021',
-    id:"4",
-    },
-    { title:'A lot of famous recipes are claimed to be made with love, but what’s a dish that’s probably made with hatred?',
-    author:'camomile123',
-    date:'6/8/2021',
-    id:"5",
-    },
-]
 function ForumList({forumData}) {
     const {path, url} = useRouteMatch()
+    const [allThreads, setAllThreads] = useState([])
+    const progressStyle={
+        width:"100%",
+        height:"100%"
+    }
+    useEffect(()=>{
+        fetchAllThreads()
+    }, [])
+
+    const fetchAllThreads = () =>{
+        const url = new URL('http://localhost:8080/forums/get')
+        axios.get(url)
+            .then(response=>{
+                setAllThreads(response.data)
+            })
+            .catch(err=>{
+                console.log("Error: ", err)
+            })
+    }
     return (
         <> 
             <Switch>
                 <Route exact path={path}>
                     <ForumCRUD/>
-                    <div className="forum-frame">
-                        {
-                            forumItems.map((forumObj)=>{
-                                return (<ForumItem key={forumObj.id} forumItem={forumObj}/>)
-                            })
-                        }
-                    </div>
+          
+                    {allThreads.length > 0
+                        ?
+                        <div className="forum-frame">
+                            {
+                                allThreads.map((forumObj)=>{
+                                    return (<ForumItem key={forumObj.doc_id} forumItem={forumObj}/>)
+                                })
+                            }
+                        </div>
+                        :
+                        <div className="circular-progress">
+                            <CircularProgress style={progressStyle}/>
+                        </div>
+                    }
                 </Route>
                 <Route path={`${path}/:threadId`}>
-                        <ForumView forumItem={forumItems[0]}/>
+                        <ForumView allThreads={allThreads} forumItem={allThreads[0]}/>
                 </Route>
             </Switch>
         </>

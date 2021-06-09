@@ -162,3 +162,11 @@ h3 {
 .forum-input-textarea__inputarea {
   padding: 5px;
 }
+
+/* Other styling */
+.circular-progress {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-top: 100px;
+}

@@ -18,6 +18,13 @@ function ForumCrud() {
         fontFamily:"Martel",
         fontWeight:"bold",
     }
+    
+    const AddForum = (forumObj) =>{
+        const url = new URL('http://localhost:8080/forums/add')
+        axios.post(url, forumObj)
+            .catch(err=>console.log("Error Adding Forum: ", err))
+    }
+
     const handleOpen = () =>{
         setOpen(open=>!open)
     }
@@ -28,7 +35,8 @@ function ForumCrud() {
         e.target["forum-input"].value=""
         const today = new Date();
         const dateFormat = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}` 
-
+        const forumObj = { title: threadTitle, date: dateFormat, user:"Dummy", content:null}
+        AddForum(forumObj)
         //account info to get user name.
     }
 
