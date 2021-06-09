@@ -16,7 +16,11 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 //     dislikes:200,
 //     user:{name:"Adriel Kim"},//ideally would be an ID referencing the user
 // }
-
+/**
+ * Prop displaying a comment on a forum or blog post.
+ * @param {*} commentItem prop containing data of a single comment
+ * @returns 
+ */
 function CommentItem({commentItem}) {
 
     const handleLike = () =>{

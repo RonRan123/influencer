@@ -12,7 +12,10 @@ const commentItemData = {
     dislikes:200,
     user:{name:"Adriel Kim"},//ideally would be an ID referencing the user
 }
-
+/**
+ * List of comments displayed under a forum or blog post
+ * @returns 
+ */
 function CommentList() {
     return (
         <div>

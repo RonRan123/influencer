@@ -4,16 +4,18 @@ import {
     CardActionArea,
     CardContent,
 }from '@material-ui/core'
-import CommentIcon from '@material-ui/icons/Comment';
-
+import CommentIcon from '@material-ui/icons/Comment'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 
 function ForumItem({forumItem}) {
+    const history = useHistory()
+    let match = useRouteMatch()
 
     const getNumComments = () =>{
         //will be used to get number of comments relating to forum post
     }
     const handleThreadRoute = ()=>{
-        console.log("HELLO")
+        history.push(`${match.url}/123`)
     }
     return (
         <div className="forum-item-container">       

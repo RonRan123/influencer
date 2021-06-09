@@ -3,6 +3,11 @@ import {
     Input,
     Button
 }from '@material-ui/core'
+/**
+ * Form component that lets users submit their own comments
+ * to a forum/blog
+ * @returns 
+ */
 function CommentInput() {
 
     const handleCommentPost = () =>{
