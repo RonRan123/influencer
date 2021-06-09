@@ -10,6 +10,7 @@
 
 # production
 /build
+/server/serviceAccountKey.json
 
 # misc
 .DS_Store
@@ -24,5 +25,6 @@ yarn-error.log*
 
 .env
 
+serviceAccountKey.json
 # can't ignore this: https://stackoverflow.com/questions/44206782/do-i-commit-the-package-lock-json-file-created-by-npm-5
 # .package-lock.json
