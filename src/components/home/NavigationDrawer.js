@@ -21,6 +21,7 @@ import{
 import {
   useHistory
 } from "react-router-dom";
+import { home, blog, forum, shop } from './routerPaths'
 
 /**
  * Dropdown navigation drawer that appears when the screen width is under 700px
