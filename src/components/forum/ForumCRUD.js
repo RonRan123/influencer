@@ -11,7 +11,7 @@ import {
  * to the forum posts
  * @returns 
  */
-function ForumCrud({setAllThreads}) {
+function ForumCrud({fetchAllThreads}) {
     const [open, setOpen] = useState(true)
     const inputStyle={
         padding:"5px",
@@ -27,6 +27,9 @@ function ForumCrud({setAllThreads}) {
     const AddForum = (forumObj) =>{
         const url = new URL('http://localhost:8080/forums/add')
         axios.post(url, forumObj)
+            .then(()=>{
+                fetchAllThreads()
+            })
             .catch(err=>console.log("Error Adding Forum: ", err))
     }
 
@@ -42,8 +45,6 @@ function ForumCrud({setAllThreads}) {
         const dateFormat = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}` 
         const forumObj = { title: threadTitle, date: dateFormat, user:"Dummy", content:null}
         AddForum(forumObj)
-        setAllThreads(allThreads=>[forumObj, ...allThreads])
-        //account info to get user name.
     }
 
     return (

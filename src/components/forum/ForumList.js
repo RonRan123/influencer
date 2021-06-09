@@ -26,11 +26,14 @@ function ForumList() {
         fetchAllThreads()
     }, [])
 
+    //TO DO: Sort by timestamp (add time stamp in post request)
     const fetchAllThreads = () =>{
         const url = new URL('http://localhost:8080/forums/get')
+        console.log("fetch threads")
         axios.get(url)
             .then(response=>{
                 setAllThreads(response.data)
+                console.log(response.data)
             })
             .catch(err=>{
                 console.log("Error: ", err)
@@ -40,14 +43,14 @@ function ForumList() {
         <> 
             <Switch>
                 <Route exact path={path}>
-                    <ForumCRUD setAllThreads={setAllThreads}/>
+                    <ForumCRUD fetchAllThreads={fetchAllThreads}/>
           
                     {allThreads.length > 0
                         ?
                         <div className="forum-frame">
                             {
                                 allThreads.map((forumObj)=>{
-                                    return (<ForumItem key={forumObj.doc_id} forumItem={forumObj}/>)
+                                    return (<ForumItem key={forumObj.doc_id} forumItem={forumObj} setAllThreads={setAllThreads}/>)
                                 })
                             }
                         </div>
@@ -58,7 +61,7 @@ function ForumList() {
                     }
                 </Route>
                 <Route path={`${path}/:threadId`}>
-                        <ForumView allThreads={allThreads} forumItem={allThreads[0]}/>
+                        <ForumView allThreads={allThreads}/>
                 </Route>
             </Switch>
         </>
