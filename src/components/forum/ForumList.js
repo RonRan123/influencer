@@ -12,13 +12,13 @@ const forumItem = {
 function ForumList({forumData}) {
     return (
         <>
-            {/* <div className="forum-frame">
+            <div className="forum-frame">
                 <ForumItem forumItem={forumItem}/>
                 <ForumItem forumItem={forumItem}/>
                 <ForumItem forumItem={forumItem}/>
                 <ForumItem forumItem={forumItem}/>
                 <ForumItem forumItem={forumItem}/>
-            </div> */}
+            </div>
             <ForumView forumItem={forumItem}/>
         </>
     )

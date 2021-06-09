@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import shopData from "./ShopData";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function ShopItems(){
+    const [products, setProducts] = React.useState();
     const classes = useStyles();
     const [selectedItem, setSelectedItem] = React.useState();
 
@@ -29,6 +30,13 @@ export default function ShopItems(){
         setSelectedItem(id);
         setCart(selectedItem);
     }
+
+    useEffect(() => {
+        fetch('http://localhost:8080/routes/products/get')
+        .then(async (res) => {
+            const results = await res.json();
+        })
+    })
 
 //mapping through the shopping data 
 //putting the fields into different parts of a MUI card

@@ -9,6 +9,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import BookIcon from '@material-ui/icons/Book';
 import ForumIcon from '@material-ui/icons/Forum';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import{
     IconButton,
     Button,
@@ -16,14 +17,11 @@ import{
     List,
     Divider
 } from '@material-ui/core'
-// const useStyles = makeStyles({
-//   list: {
-//     width: 250,
-//   },
-//   fullList: {
-//     width: 'auto',
-//   },
-// });
+
+import {
+  useHistory
+} from "react-router-dom";
+import { home, blog, forum, shop } from './routerPaths'
 
 /**
  * Dropdown navigation drawer that appears when the screen width is under 700px
@@ -31,7 +29,7 @@ import{
  * @returns 
  */
 export default function NavigationDrawer() {
-//   const classes = useStyles();
+  const history = useHistory()
   const [open, setOpen] = useState(false)
   const toggleDrawer = () => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -40,30 +38,36 @@ export default function NavigationDrawer() {
     setOpen(open=>!open)
   };
 
+  const listItemStyle={height:"80px",backgroundColor:"#f7f1f0"}
+  
   const list = (anchor) => (
     <div
       onClick={toggleDrawer()}
       onKeyDown={toggleDrawer()}
     >
       <List>
-        <ListItem style={{height:"80px",backgroundColor:"#f7f1f0"}} button>
+        <ListItem onClick={()=>{history.push(home)}} style={listItemStyle} button>
             <ListItemIcon><HomeIcon/></ListItemIcon>
             <ListItemText primary={"Home"} />
         </ListItem>
         
-        <ListItem style={{height:"80px",backgroundColor:"#f7f1f0"}} button>
+        <ListItem onClick={()=>{history.push(blog)}} style={listItemStyle} button>
             <ListItemIcon><BookIcon/></ListItemIcon>
             <ListItemText primary={"Blog"} />
         </ListItem>
         
-        <ListItem style={{height:"80px",backgroundColor:"#f7f1f0"}} button>
+        <ListItem onClick={()=>{history.push(forum)}} style={listItemStyle} button>
             <ListItemIcon><ForumIcon/></ListItemIcon>
             <ListItemText primary={"Forum"} />
         </ListItem>
         
-        <ListItem style={{height:"80px",backgroundColor:"#f7f1f0"}} button>
+        <ListItem onClick={()=>{history.push(shop)}} style={listItemStyle} button>
             <ListItemIcon><LocalMallIcon/></ListItemIcon>
             <ListItemText primary={"Shop"} />
+        </ListItem>
+        <ListItem onClick={()=>{console.log("To be done")}} style={listItemStyle} button>
+            <ListItemIcon><AccountCircleIcon/></ListItemIcon>
+            <ListItemText primary={"Login"} />
         </ListItem>
       </List>
       <Divider />
