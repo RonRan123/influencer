@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Button, Container, TextField } from "@material-ui/core";
 import PostCard from "./PostCard"
-import ViewPost from "./BlogPost/ViewBlog"
+import ShowPost from "./ShowPost.js"
 import ImageCard from "./ImageCard"
 import '../css/Blog.css'
 import Masonry from 'react-masonry-css'
@@ -46,7 +46,7 @@ function Blog(){
         1100: 2,
         700: 1
     }
-    // console.log(posts)
+    console.log(posts)
     return (
         <Switch>
             <Route exact path={match.path}>
@@ -66,8 +66,7 @@ function Blog(){
                 </Container>
             </Route>
             <Route path={`${match.path}/:postID`}>
-                <p>Helloworlds!</p>
-                {/* <ViewPost title={} date={} likes={} image={} comments={post.comments}/> */}
+                <ShowPost posts={posts}/>
             </Route>
         </Switch>
     );
