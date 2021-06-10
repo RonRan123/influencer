@@ -21,7 +21,7 @@ import Menu from '@material-ui/core/Menu';
 import { Card } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CardActions from '@material-ui/core/CardActions';
-
+import Box from '@material-ui/core/Box';
 
 
 
@@ -30,12 +30,15 @@ const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx")
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    //flexGrow: 1,
+    margin: theme.spacing(2),
   },
   paper: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(5),
     color: theme.palette.text.secondary, 
     alignItems: 'center',
+    justifyContent: 'center',
+
   },
   modal: {
     display: 'flex',
@@ -182,17 +185,20 @@ export default function ShopItems(){
 //wrapping it in a grid  
     return( 
         <div className = 'background'>   
-            <IconButton color="primary" aria-label="add to shopping cart">   
+            <br></br>        
+            <IconButton color="primary" aria-label="add to shopping cart" >   
                 <AddShoppingCartIcon onClick={handleOpen}/>
             </IconButton>      
             <div className={classes.root}>
-                <Grid container spacing={1} justify="center"> 
+                <Grid container spacing={3} justify="center"> 
                     {products && products.map((item, index) => 
-                    <div> 
+                    <div className={classes.root}> 
                         <Paper className={classes.paper}> 
                             <ShopCard id={index} info={item}/> 
                             <div><br></br></div>
-                            <Button className='cart-button' variant='contained' onClick={() => handleAdd(item.title, item.price)}>Add to Cart</Button>
+                            <Box justifyContent='center'>
+                                <Button className='cart-button' variant='contained' onClick={() => handleAdd(item.title, item.price)}>Add to Cart</Button>
+                            </Box>
                         </Paper>
                         <br></br>
                     </div>)}
