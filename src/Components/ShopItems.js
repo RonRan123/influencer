@@ -13,6 +13,15 @@ import IconButton from '@material-ui/core/IconButton';
 import {Elements} from '@stripe/react-stripe-js';
 import CheckoutForm from "./CheckoutForm";
 import {loadStripe} from '@stripe/stripe-js';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import { Card } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CardActions from '@material-ui/core/CardActions';
+
 
 
 
@@ -25,19 +34,22 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(3),
-    color: theme.palette.text.secondary, // change to CSS
+    color: theme.palette.text.secondary, 
     alignItems: 'center',
   },
   modal: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   paperModal: {
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    height: 500,
+    width: 300
   },
   stripeModal: {
     width: 400,
@@ -54,6 +66,32 @@ export default function ShopItems(){
     const [cart1, setCart1] = React.useState();
     const [open, setOpen] = React.useState(false);
     const [openStripe, setOpenStripe] = React.useState(false)
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+
+
+    const options = [
+        'Choose Size',
+        'Small',
+        'Medium',
+        'Large',
+      ];
+      
+      
+
+      const handleClickListItem = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+    
+      const handleMenuItemClick = (event, index) => {
+        setSelectedIndex(index);
+        setAnchorEl(null);
+      };
+
+      const handleSizeClose = () => {
+        setAnchorEl(null);
+      };
 
     const handleOpen = () => {
       setOpen(true);
@@ -74,6 +112,11 @@ export default function ShopItems(){
 
     const handleAdd = (id1, id2) => {
         addProducts(id1, id2);
+        return window.location.reload();
+    }
+
+    const handleDelete = (id1) => {
+        deleteCart(id1);
         return window.location.reload();
     }
 
@@ -101,6 +144,21 @@ export default function ShopItems(){
         .then(res => res.json());
     }
 
+    const deleteCart = async (id) => {
+        fetch('http://localhost:8080/cart/delete',
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "DELETE",
+            body: JSON.stringify({
+                doc_id: id
+            }),
+        })
+        .then(res => res.json());
+    };
+
 
     const getCart = async () => {
         fetch('http://localhost:8080/cart/get')
@@ -112,10 +170,13 @@ export default function ShopItems(){
     };
 
 
+    
+
    useEffect( () => {
        getProducts();
        getCart();
    }, [])
+
 //mapping through the shopping data 
 //putting the fields into different parts of a MUI card
 //wrapping it in a grid  
@@ -126,37 +187,50 @@ export default function ShopItems(){
             </IconButton>      
             <div className={classes.root}>
                 <Grid container spacing={1} justify="center"> 
-                    {products && products.map((item, index) => <div> <Paper className={classes.paper}> <ShopCard id={index} info={item}/> <div><br></br></div><Button className='cart-button' variant='contained' onClick={() => handleAdd(item.title, item.price)}>Add to Cart</Button></Paper><br></br></div>)}
+                    {products && products.map((item, index) => 
+                    <div> 
+                        <Paper className={classes.paper}> 
+                            <ShopCard id={index} info={item}/> 
+                            <div><br></br></div>
+                            <Button className='cart-button' variant='contained' onClick={() => handleAdd(item.title, item.price)}>Add to Cart</Button>
+                        </Paper>
+                        <br></br>
+                    </div>)}
                 </Grid>
                 <br></br>
                 <div>
-                
-                <Modal
-                    aria-labelledby="transition-modal-title"
-                    className={classes.modal}
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    BackdropComponent={Backdrop}
-                    BackdropProps={{
-                    timeout: 500,
-                    }}>
+                <Modal aria-labelledby="transition-modal-title" className={classes.modal} open={open} onClose={handleClose} closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{ timeout: 500, }}>
                     <Fade in={open}>
                     <div className={classes.paperModal}>
-                        <h2 id="transition-modal-title">Your Cart: {cart1 && cart1.map((product) => <div>{product.title} - ${product.price}</div> )}</h2>
+                        <h2 id="transition-modal-title">Your Cart: {cart1 && cart1.map((product) => 
+                        <Card>
+                            <CardActions>
+                            <div>{product.title} - ${product.price} 
+                            <List component="nav" aria-label="Device settings">
+                                <ListItem button aria-haspopup="true"aria-controls="lock-menu" aria-label="Click To Select Size" onClick={handleClickListItem}>
+                                    <ListItemText primary="Click To Select Size" secondary={options[selectedIndex]} />
+                                </ListItem>
+                            </List>
+                            <Menu id="lock-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleSizeClose}>
+                            {options.map((option, index) => (
+                            <MenuItem key={option} disabled={index === 0} selected={index === selectedIndex} onClick={(event) => handleMenuItemClick(event, index)}>
+                                {option}
+                            </MenuItem>
+                            ))}
+                            </Menu>
+                            </div>
+                            <div>
+                            <IconButton onClick={() => handleDelete(product.doc_id)} aria-label="delete">
+                                <DeleteIcon />
+                            </IconButton>
+                            </div>
+                            </CardActions>
+                        </Card> )}
+                        </h2>
                         <Button variant = "contained" color = "primary" type="button" onClick={handleOpenStripe}>
                             Click Here To Purchase
                         </Button>
-                        <Modal
-                            aria-labelledby="transition-modal-title"
-                            className={classes.modal}
-                            open={openStripe}
-                            onClose={handleCloseStripe}
-                            closeAfterTransition
-                            BackdropComponent={Backdrop}
-                            BackdropProps={{
-                            timeout: 500,
-                            }}>
+                        <Modal aria-labelledby="transition-modal-title" className={classes.modal} open={openStripe} onClose={handleCloseStripe}closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{timeout: 500}}>
                             <Fade in={openStripe}>
                             <div className={classes.stripeModal}>
                             <Elements stripe={stripePromise}>
