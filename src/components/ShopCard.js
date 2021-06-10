@@ -41,7 +41,7 @@ function ShopCard({info}){
             </CardActionArea>
             <CardActions>
                 <Typography size="body2" color="primary" component="h5">
-                    {info.price}
+                    ${info.price}
                 </Typography>
             </CardActions>
         </Card>
