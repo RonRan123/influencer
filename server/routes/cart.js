@@ -23,9 +23,10 @@ router.post("/add", async (req, res) => {
 
 
 router.delete("/delete", async (req, res) => {
-    const { productID, ...rest } = req.body;
-    const resp = await db.collection("cart").doc(doc).delete();
-    console.log("From products, deleted: ", productID);
+    const { doc_id } = req.body;
+    console.log(doc_id)
+    const resp = await db.collection("cart").doc(doc_id).delete();
+    console.log("From products, deleted: ", doc_id);
     res.send("Got a DELETE request for cart");
   });  
 
