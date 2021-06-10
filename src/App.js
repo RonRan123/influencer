@@ -2,12 +2,12 @@ import "./App.css";
 //import Blog from "./components/Blog";
 //import HomePage from "./components/home/HomePage";
 import React from "react";
-//import BlogPost from "./components/BlogPost/BlogPost";
-import ShopItems from "./Components/ShopItems";
+import ShopItems from "./components/ShopItems"
+
 function App() {
   return (
     <div>
-      <ShopItems />
+      <ShopItems/>
     </div>
   );
 }
