@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import { Button, Container, TextField } from "@material-ui/core";
 import PostCard from "./PostCard"
 import ShowPost from "./ShowPost.js"
@@ -6,9 +6,11 @@ import ImageCard from "./ImageCard"
 import '../css/Blog.css'
 import Masonry from 'react-masonry-css'
 import {useRouteMatch, Switch, Route} from "react-router-dom"
+import {BlogPostContext} from './BlogPostContext'
 
 function Blog(){
-    const [posts, setPosts] = useState([]);
+    // const [posts, setPosts] = useState([]);
+    const { posts } = useContext(BlogPostContext);
     const match = useRouteMatch();
     // const [input, setInput] = useState("canyon");
     // const [random, setRandom] = useState(false);
@@ -30,23 +32,23 @@ function Blog(){
      * Retrieves the photos from the backend
      * 
      */
-    const getMyPhotos = async () => {
-        fetch('/blog/get')
-            .then(resp => resp.json())
-            .then(resp => setPosts(resp));
-    }
+    // const getMyPhotos = async () => {
+    //     fetch('/blog/get')
+    //         .then(resp => resp.json())
+    //         .then(resp => setPosts(resp));
+    // }
 
     useEffect(() =>{
         // getSomePhotos();
-        getMyPhotos();
-    }, [])
+        // getMyPhotos();
+    }, [posts])
 
     const breakpoints = {
         default: 3,
         1100: 2,
         700: 1
     }
-    console.log(posts)
+    console.log("posts", posts);
     return (
         <Switch>
             <Route exact path={match.path}>

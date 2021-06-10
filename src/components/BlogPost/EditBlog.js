@@ -17,17 +17,31 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import UpdateBlog from "./UpdateBlog";
+import { BlogPostContext } from "../BlogPostContext";
+// import UpdateBlog from "./UpdateBlog";
 
 export default function EditPost({props}) {
   const [blogData, setBlogData] = useState(props);
   const [open, setOpen] = useState(false);
 
   const { edit, setEdit } = useContext(EditContext);
-
   const [selectedDate, setSelectedDate] = useState(new Date(blogData.date));
-
+  const {getPosts} = useContext(BlogPostContext);
   let link = "";
+
+  const UpdateBlog = (data) => {
+    console.log("update data", data);
+    fetch("/blog/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })      
+    .then(resp => console.log(resp))
+    .then(c => getPosts())
+      .catch(err => console.error('error:' + err));
+  }
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,7 +60,6 @@ export default function EditPost({props}) {
   };
 
   const handleSave = () => {
-    console.log("pre-sending data", JSON.stringify(blogData));
     UpdateBlog(blogData);
     setEdit(false);
   };
