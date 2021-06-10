@@ -11,12 +11,15 @@ import { useParams } from 'react-router-dom'
  * to a forum/blog. This submits comments to the Cloud Firestore database
  * @returns 
  */
-function CommentInput({setComments}) {
+function CommentInput({setComments, fetchComments}) {
     const { threadId } = useParams()
 
     const addComment = (commentObj) => {
         const url = new URL('http://localhost:8080/comments/add')
         axios.post(url, commentObj)
+            .then(()=>{
+                fetchComments()
+            })
             .catch(err=>{console.log("Add comment error: ", err)})
     }
 
@@ -37,7 +40,7 @@ function CommentInput({setComments}) {
             }
 
         addComment(commentObj)
-        setComments(comments=>[commentObj, ...comments])
+        // setComments(comments=>[commentObj, ...comments])
     }
     const handleCancel = (e) => {
         e.preventDefault()

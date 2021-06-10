@@ -14,10 +14,20 @@
 }
 
 /* Forum Item */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .forum-item-container {
   display: flex;
   justify-content: flex-start;
   margin-bottom: 5px;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
 }
 h3 {
   font-family: var(--martel-font);
@@ -66,7 +76,11 @@ h3 {
   padding: 10px 10px 0px 10px;
 }
 .comment-item-container {
+  display: flex;
+  justify-content: flex-start;
   margin: 5px;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
 }
 
 /* Forum comments  */
@@ -116,6 +130,46 @@ h3 {
   background-color: var(--powder-color);
   border-radius: 0px 5px 5px 0px;
   flex-grow: 1;
+  overflow: hidden;
+  width: 60px;
+  animation-name: shrinkSide;
+  animation-duration: 0.25s;
+}
+@keyframes growSide {
+  from {
+    width: 60px;
+  }
+  to {
+    width: 100px;
+  }
+}
+@keyframes shrinkSide {
+  from {
+    width: 100px;
+  }
+  to {
+    width: 60px;
+  }
+}
+@keyframes opacity-transition {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.grow-side {
+  width: 0px;
+  animation-name: growSide;
+  animation-duration: 0.25s;
+  width: 100px;
+}
+.opacity-anim {
+  animation-name: opacity-transition;
+  animation-duration: 0.25s;
+  height: 100%;
+  width: 100%;
 }
 .forum-crud-container {
   max-width: 900px;

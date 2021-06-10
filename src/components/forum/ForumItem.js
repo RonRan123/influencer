@@ -9,7 +9,11 @@ import CommentIcon from '@material-ui/icons/Comment'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle'
+import CancelIcon from '@material-ui/icons/Cancel'
 import { IconButton } from '@material-ui/core'
+
+import DeleteController from './crud_helpers/DeleteController'
 
 import axios from 'axios'
 /**
@@ -21,6 +25,7 @@ import axios from 'axios'
 function ForumItem({forumItem, setAllThreads}) {
     const history = useHistory()
     const [editMode, setEditMode] = useState(false)
+    const [deleteMode, setDeleteMode] = useState(false)
     let match = useRouteMatch()
     const cardStyle={
         width:"850px",
@@ -41,15 +46,29 @@ function ForumItem({forumItem, setAllThreads}) {
     const handleEdit = () =>{
         setEditMode(editMode=>!editMode)
     }
+    
+    const submitEdit = () =>{
+        const editedText = document.getElementById("edit-input").value;
+        const url = new URL('http://localhost:8080/forums/update')
+        axios.put(url, {...forumItem, title:editedText})
+            .catch(err=>{
+                console.log("Error forum update: ", err)
+            })
 
-    //make sure to delete associated comments as well...
-    const handleDelete = () => {
-        const url = new URL('http://localhost:8080/forums/delete')
-        url.searchParams.append('forumId', forumItem.doc_id)
-        axios.delete(url)
-            .catch(err=>console.log("Fourm post deletion error: ", err))
-        
-        setAllThreads(allThreads => allThreads.filter(thread=>thread.doc_id !== forumItem.doc_id))
+        //update client side view
+        setAllThreads(allThreads=>
+            allThreads.map(thread=>{
+                if(thread.doc_id === forumItem.doc_id){
+                    return {...thread, title:editedText}
+                }
+                return thread;
+            })
+        )
+        handleEdit()
+    }
+
+    const handleDeleteMode = () =>{
+        setDeleteMode(deleteMode => !deleteMode)
     }
 
     return (
@@ -68,7 +87,7 @@ function ForumItem({forumItem, setAllThreads}) {
                     </CardContent>
                   </CardActionArea>
                 :<CardContent classes={{root:"card-root"}}>
-                    <Input style={editInputStyle} multiline={true} defaultValue={forumItem.title}/>
+                    <Input id="edit-input" style={editInputStyle} multiline={true} defaultValue={forumItem.title}/>
                     <p className="forum">Posted by <b>{forumItem.user}</b> on <b>{forumItem.date}</b></p>
                     <p className="stats">
                         <CommentIcon/> {'104'} Comments
@@ -76,10 +95,27 @@ function ForumItem({forumItem, setAllThreads}) {
                 </CardContent>
                 }
             </Card>
-            <div className="edit-delete-container">
-                <IconButton onClick={handleEdit}><EditIcon/></IconButton>
-                <IconButton onClick={handleDelete}><DeleteIcon/></IconButton>
+            {!deleteMode
+            ?<div className="edit-delete-container">
+                {!editMode
+                ?   <>
+                        <IconButton onClick={handleEdit}><EditIcon/></IconButton>
+                        <IconButton onClick={handleDeleteMode}><DeleteIcon/></IconButton>
+                    </>
+                :   <>
+                        <IconButton onClick={handleEdit}><CancelIcon/></IconButton>
+                        <IconButton onClick={submitEdit}><CheckCircleIcon/></IconButton>
+                    </>
+                }
             </div>
+           : <DeleteController 
+                forumItem={forumItem} 
+                setAllThreads={setAllThreads} 
+                handleCancel={handleDeleteMode}
+                restUrl={'http://localhost:8080/forums/delete'}
+                idParam={"forumId"}
+            />
+          }
         </div>
     )
 }

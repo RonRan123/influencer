@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
     Card,
     CardActionArea,
@@ -9,6 +9,9 @@ import {
 import CommentIcon from '@material-ui/icons/Comment';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import DeleteIcon from '@material-ui/icons/Delete'
+
+import DeleteController from './crud_helpers/DeleteController';
 // const commentItemData = {
 //     date:"6/8/2021",
 //     text:"I don't know lol. This is a silly question",
@@ -21,8 +24,14 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
  * @param {*} commentItem prop containing data of a single comment
  * @returns 
  */
-function CommentItem({commentItem}) {
+function CommentItem({commentItem, setComments}) {
 
+    const [deleteMode, setDeleteMode] = useState(false)
+
+    const cardStyle={
+        width:"850px",
+        borderRadius:"5px 0px 0px 5px",
+    }
     const handleLike = () =>{
         //update number of likes on client and database
     }
@@ -31,13 +40,17 @@ function CommentItem({commentItem}) {
         //update number of dislikes on client and database
     }
 
+    const handleDeleteMode = () =>{
+        setDeleteMode(dMode => !dMode)
+    }
+
     const iconButtonStyle={
         margin:0,
         padding:"2px"
     }
     return (
         <div className="comment-item-container">       
-            <Card>
+            <Card style={cardStyle}>
                 <CardContent classes={{root:"card-root"}} >
                     <p className="forum">{commentItem.content}</p>
                     <Divider/>
@@ -54,6 +67,19 @@ function CommentItem({commentItem}) {
                     </p>
                 </CardContent>
             </Card>
+
+            {!deleteMode
+              ?<div className="edit-delete-container">
+                        <IconButton onClick={handleDeleteMode}><DeleteIcon/></IconButton>
+               </div>
+              :<DeleteController 
+                    forumItem={commentItem} 
+                    setAllThreads={setComments} 
+                    handleCancel={handleDeleteMode}
+                    restUrl={'http://localhost:8080/comments/delete'}
+                    idParam={"commentId"}
+                />
+            }
         </div>
     )
 }

@@ -40,7 +40,7 @@ router.put("/update", async (req, res) => {
         title: title, 
         user: user
     });
-  
+    console.log("From forums, updated: ", doc_id);
     res.send("Got a put request to update a forum");
 });
 

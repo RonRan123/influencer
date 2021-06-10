@@ -43,7 +43,7 @@ router.post("/add", async (req, res) => {
 
 
 router.delete("/delete", async (req, res) => {
-    const {doc_id, ...rest} = req.body;
+    const doc_id = req.query.commentId
     const resp = await db.collection("comments").doc(doc_id).delete();
     console.log("From comments, deleted: ", doc_id);
     res.send("Got a DELETE request for comments");

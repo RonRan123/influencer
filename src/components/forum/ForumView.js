@@ -15,25 +15,11 @@ import axios from 'axios'
 function ForumView({allThreads}) {
     const { threadId } = useParams()
     const [currentForum, setCurrentForum] = useState(null)
-    const [comments, setComments] = useState([])
     
     useEffect(()=>{
         setCurrentForum(allThreads.find(thread=>thread.doc_id === threadId))
-        getComments()
     }, [])
 
-    const getComments = () =>{
-        const url = new URL('http://localhost:8080/comments/getFromForum')
-        url.searchParams.append('forumId',threadId)
-        axios.get(url)
-            .then(response=>{
-                setComments(response.data)
-            })
-            .catch(err=>{
-                console.log("Error getting comments: ", err)
-            })
-    
-    }
 
     return (
         <div className="forum-view">
@@ -42,7 +28,7 @@ function ForumView({allThreads}) {
                     <h3>{currentForum.title}</h3>
                     <h4>Posted by {currentForum.user} on {currentForum.date}</h4>
                     <Divider/>
-                    <CommentList setComments={setComments} comments={comments}/>
+                    <CommentList/>
                 </>
             }
         </div>
