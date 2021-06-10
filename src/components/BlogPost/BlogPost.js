@@ -16,26 +16,15 @@ import EditProvider from "./EditContext";
 // };
 
 export default function BlogPost({props}) {
+  console.log("props from blogpost", props)
   return (
     <div>
       <EditProvider>
         <ViewPost
-          title={props.title}
-          date={props.date}
-          image={props.image}
-          content={props.content}
-          likes={props.likeCount}
-          comments={props.comments}
-          id={props.doc_id}
+          props={props}
         ></ViewPost>
         <EditPost
-          title={props.title}
-          date={props.date}
-          image={props.image}
-          content={props.content}
-          likes={props.likeCount}
-          comments={props.comments}
-          id={props.doc_id}
+          props={props}
         ></EditPost>
       </EditProvider>
     </div>

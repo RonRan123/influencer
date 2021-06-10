@@ -19,17 +19,8 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 import UpdateBlog from "./UpdateBlog";
 
-export default function EditPost(props) {
-  const [blogData, setBlogData] = useState({
-    title: props.title,
-    date: props.date,
-    image: props.image,
-    content: props.content,
-    likes: props.likes,
-    comments: props.comments,
-    id: props.doc_id,
-  });
-
+export default function EditPost({props}) {
+  const [blogData, setBlogData] = useState(props);
   const [open, setOpen] = useState(false);
 
   const { edit, setEdit } = useContext(EditContext);
@@ -55,7 +46,8 @@ export default function EditPost(props) {
   };
 
   const handleSave = () => {
-    UpdateBlog(props);
+    console.log("pre-sending data", JSON.stringify(blogData));
+    UpdateBlog(blogData);
     setEdit(false);
   };
 
@@ -165,7 +157,7 @@ export default function EditPost(props) {
               <IconButton>
                 <FavoriteIcon style={{ color: "C7D8C6" }} />
               </IconButton>
-              {blogData.likes} likes
+              {blogData.likeCount} likes
             </div>
           </div>
           <div
