@@ -6,30 +6,24 @@ import LockIcon from "@material-ui/icons/Lock";
 import { useAuth } from "./context/AuthContext";
 import { Link } from "react-router-dom";
 
-export default function SignUp() {
+export default function LogIn() {
   const [email, setEmail] = useState("");
 
-  const [firstPW, setFirstPW] = useState("");
-
-  const [secondPW, setSecondPW] = useState("");
+  const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
 
   const [loading, setLoading] = useState(false);
 
-  const { signup, currentUser } = useAuth();
+  const { login } = useAuth();
 
   async function handleSubmit() {
-    if (firstPW !== secondPW) {
-      return setError("Passwords do not match");
-    }
-
     try {
       setError("");
       setLoading(true);
-      await signup(email, firstPW);
+      await login(email, password);
     } catch {
-      setError("Failed to create an account");
+      setError("Failed to log in");
     }
 
     setLoading(false);
@@ -54,9 +48,8 @@ export default function SignUp() {
               marginBottom: "10px",
             }}
           >
-            Sign Up
+            Log In
           </div>
-          {/* {currentUser.email} */}
           {error && <Alert severity="error">{error}</Alert>}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <div>
@@ -91,7 +84,7 @@ export default function SignUp() {
                   <TextField
                     label="Password"
                     onChange={(e) => {
-                      setFirstPW(e.target.value);
+                      setPassword(e.target.value);
                     }}
                   />
                 </Grid>
@@ -102,30 +95,7 @@ export default function SignUp() {
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: "10px",
-              marginBottom: "80px",
-            }}
-          >
-            <div>
-              <Grid container spacing={1} alignItems="flex-end">
-                <Grid item>
-                  <LockIcon />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    label="Retype Password"
-                    onChange={(e) => {
-                      setSecondPW(e.target.value);
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
+              marginTop: "130px",
             }}
           >
             <div style={{ width: "80%" }}>
@@ -135,7 +105,7 @@ export default function SignUp() {
                 onClick={handleSubmit}
                 disabled={loading}
               >
-                SIGN UP
+                LOG IN
               </Button>
             </div>
           </div>
@@ -149,7 +119,7 @@ export default function SignUp() {
           fontFamily: "'Martel', serif",
         }}
       >
-        Already have an account? <Link to="/login">Log in</Link>
+        Don't have an account? <Link to="/signup">Sign up</Link>
       </div>
     </>
   );
