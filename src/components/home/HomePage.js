@@ -6,7 +6,7 @@ import ShopItems from '../ShopItems'
 import NavigationDrawer from './NavigationDrawer'
 import Blog from '../Blog'
 import '../../css/home-page.css'
-
+import BlogPostProvider from '../BlogPostContext'
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,6 +16,7 @@ import {
 //testing
 import ForumList from '../forum/ForumList'
 import { home, blog, forum, shop } from './routerPaths'
+import BlogPost from '../BlogPost/BlogPost'
 
 
 /**
@@ -53,7 +54,9 @@ function HomePage() {
                    <ForumList/> 
                 </Route>
                 <Route path ={blog}>
-                    <Blog/>
+                    <BlogPostProvider>
+                        <Blog />
+                    </BlogPostProvider>
                 </Route>
                 <Route path ={shop}>
                     <ShopItems/>

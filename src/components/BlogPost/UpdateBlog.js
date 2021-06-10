@@ -1,16 +1,13 @@
 export default function UpdateBlog(data) {
-  fetch("https://localhost:8080/blog-post/put", {
+  // console.log("update data", data);
+  fetch("/blog/update", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    .then(res => res.json())
+    .then(json => console.log(json))
+    .catch(err => console.error('error:' + err));
 }
