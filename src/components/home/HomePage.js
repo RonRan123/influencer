@@ -1,6 +1,7 @@
 import React from 'react'
 import FeaturedGrid from './FeaturedGrid'
 import HomeNavbar from './HomeNavbar'
+import Footer from './Footer'
 import ShopItems from '../ShopItems'
 import NavigationDrawer from './NavigationDrawer'
 import Blog from '../Blog'
@@ -14,6 +15,8 @@ import {
 
 //testing
 import ForumList from '../forum/ForumList'
+import { home, blog, forum, shop } from './routerPaths'
+
 
 /**
  * Home/Landing page containing navigation bar,
@@ -43,19 +46,21 @@ function HomePage() {
             </div>
 
             <Switch>
-                <Route exact path="/">
+                <Route exact path={home}>
                     <FeaturedGrid/>
                 </Route>
-                <Route path="/forum">
+                <Route path={forum}>
                    <ForumList/> 
                 </Route>
-                <Route path ="/blog">
+                <Route path ={blog}>
                     <Blog/>
                 </Route>
-                <Route path ="/shop">
+                <Route path ={shop}>
                     <ShopItems/>
                 </Route>
             </Switch>
+            
+            <Footer/>
         </Router>
     )
 }

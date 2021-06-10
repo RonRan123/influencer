@@ -1,28 +1,58 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import CommentItem from './CommentItem'
 import CommentInput from './CommentInput'
 import {
-    Divider
+    Divider,
+    CircularProgress
 }from '@material-ui/core'
-
-const commentItemData = {
-    date:"6/8/2021",
-    text:"I’d just like to interject for a moment. What you’re refering to as Linux, is in fact, GNU/Linux, or as I’ve recently taken to calling it, GNU plus Linux. Linux is not an operating system unto itself, but rather another free component of a fully functioning GNU system made useful by the GNU corelibs, shell utilities and vital system components comprising a full OS as defined by POSIX.",
-    likes:100,
-    dislikes:200,
-    user:{name:"Adriel Kim"},//ideally would be an ID referencing the user
-}
-
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+/**
+ * List of comments displayed under a forum or blog post
+ * This component is a parent of ForumView.js
+ * @returns 
+ */
 function CommentList() {
+    const { threadId } = useParams()
+    const [comments, setComments] = useState([])
+
+    useEffect(()=>{
+        getComments()
+    }, [])
+
+    const getComments = () =>{
+        const url = new URL('http://localhost:8080/comments/getFromForum')
+        url.searchParams.append('forumId',threadId)
+        axios.get(url)
+            .then(response=>{
+                setComments(response.data)
+            })
+            .catch(err=>{
+                console.log("Error getting comments: ", err)
+            })
+    
+    }
     return (
         <div>
-            <CommentItem commentItem={commentItemData}/>
-            <Divider/>
-            <CommentItem commentItem={commentItemData}/>
-            <Divider/>
-            <CommentItem commentItem={commentItemData}/>
-            <Divider/>
-            <CommentInput/>
+            {comments.length > 0
+            ? comments.map((comment, index)=>{
+                return(
+                    <>
+                        <CommentItem 
+                            key={comment.doc_id} 
+                            commentItem={comment}
+                            setComments={setComments}
+                        />
+                        <Divider key={index}/>
+                    </>
+                )
+            })
+            :
+            <div className="circular-progress">
+                <CircularProgress style={{width:"100%", height:"100%"}}/>
+            </div>
+            }
+            <CommentInput setComments={setComments} fetchComments={getComments} />
         </div>
     )
 }
