@@ -68,7 +68,7 @@ function Blog(){
                 </Container>
             </Route>
             <Route path={`${match.path}/:postID`}>
-                <ShowPost posts={posts}/>
+                <ShowPost/>
             </Route>
         </Switch>
     );
