@@ -26,7 +26,7 @@ router.post("/add", async (req, res) => {
 
 
 router.delete("/delete", async (req, res) => {
-    const {doc_id, ...rest} = req.body;
+    const doc_id = req.query.forumId
     const resp = await db.collection("forums").doc(doc_id).delete();
     console.log("From forums, deleted: ", doc_id);
     res.send("Got a DELETE request for forums");
@@ -40,7 +40,7 @@ router.put("/update", async (req, res) => {
         title: title, 
         user: user
     });
-  
+    console.log("From forums, updated: ", doc_id);
     res.send("Got a put request to update a forum");
 });
 

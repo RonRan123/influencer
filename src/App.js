@@ -1,14 +1,17 @@
 import "./App.css";
-import Blog from "./components/Blog";
-import HomePage from "./components/home/HomePage";
 import React from "react";
-import BlogPost from "./components/BlogPost/BlogPost";
+import SignUp from "./components/authentication/SignUp";
+import LogIn from "./components/authentication/LogIn";
+import { AuthProvider } from "./components/authentication/context/AuthContext";
 
 function App() {
   return (
-    <div>
-      <HomePage />
-    </div>
+    <AuthProvider>
+      <div>
+        <LogIn />
+      </div>
+      );
+    </AuthProvider>
   );
 }
 
