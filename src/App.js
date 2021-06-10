@@ -1,12 +1,16 @@
 import "./App.css";
 import React from "react";
-import SignUp from "./Components/authentication/SignUp";
+import SignUp from "./components/authentication/SignUp";
+import { AuthProvider } from "./components/authentication/context/AuthContext";
 
 function App() {
   return (
-    <div>
-      <SignUp />
-    </div>
+    <AuthProvider>
+      <div>
+        <SignUp />
+      </div>
+      );
+    </AuthProvider>
   );
 }
 

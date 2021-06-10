@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Paper, Grid, TextField, Button, IconButton } from "@material-ui/core";
+import { Paper, Grid, TextField, Button } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
+import { useAuth } from "./context/AuthContext";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -10,13 +12,27 @@ export default function SignUp() {
 
   const [secondPW, setSecondPW] = useState("");
 
-  const handleSubmit = () => {
-    if (firstPW === secondPW) {
-      return "need work";
-    } else {
-      alert("please enter valid password");
+  const [error, setError] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const { signup, currentUser } = useAuth();
+
+  async function handleSubmit() {
+    if (firstPW !== secondPW) {
+      return setError("Passwords do not match");
     }
-  };
+
+    try {
+      setError("");
+      setLoading(true);
+      await signup(email, firstPW);
+    } catch {
+      setError("Failed to create an account");
+    }
+
+    setLoading(false);
+  }
 
   return (
     <>
@@ -39,6 +55,8 @@ export default function SignUp() {
           >
             Sign Up
           </div>
+          {/* {currentUser.email} */}
+          {error && <Alert severity="error">{error}</Alert>}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <div>
               <Grid container spacing={1} alignItems="flex-end">
@@ -114,6 +132,7 @@ export default function SignUp() {
                 fullWidth
                 style={{ textAlign: "center", backgroundColor: "#C7D8C6" }}
                 onClick={handleSubmit}
+                disabled={loading}
               >
                 SIGN UP
               </Button>
