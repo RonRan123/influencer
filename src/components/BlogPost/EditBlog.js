@@ -19,14 +19,15 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 import { BlogPostContext } from "../../context/BlogPostContext";
 // import UpdateBlog from "./UpdateBlog";
+import DeleteBlog from "./DeleteBlog";
 
-export default function EditPost({props}) {
+export default function EditPost({ props }) {
   const [blogData, setBlogData] = useState(props);
   const [open, setOpen] = useState(false);
 
   const { edit, setEdit } = useContext(EditContext);
   const [selectedDate, setSelectedDate] = useState(new Date(blogData.date));
-  const {getPosts} = useContext(BlogPostContext);
+  const { getPosts } = useContext(BlogPostContext);
   let link = "";
 
   const UpdateBlog = (data) => {
@@ -37,11 +38,11 @@ export default function EditPost({props}) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    })      
-    .then(resp => console.log(resp))
-    .then(c => getPosts())
-      .catch(err => console.error('error:' + err));
-  }
+    })
+      .then((resp) => console.log(resp))
+      .then((c) => getPosts())
+      .catch((err) => console.error("error:" + err));
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -62,6 +63,10 @@ export default function EditPost({props}) {
   const handleSave = () => {
     UpdateBlog(blogData);
     setEdit(false);
+  };
+
+  const handleDelete = () => {
+    DeleteBlog({ doc_id: blogData });
   };
 
   const formatDate = (date) => {
@@ -91,6 +96,16 @@ export default function EditPost({props}) {
       <div style={{ backgroundColor: "#F7F1F0" }}>
         <div style={{ height: "3vh" }}></div>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            onClick={handleDelete}
+            style={{
+              marginRight: "1vw",
+              backgroundColor: "#E7717D",
+              fontFamily: "'Martel', serif",
+            }}
+          >
+            DELETE
+          </Button>
           <Button
             onClick={handleSave}
             style={{
