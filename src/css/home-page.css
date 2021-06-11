@@ -152,6 +152,18 @@
   animation-duration: 0.5s;
   object-fit: cover;
 }
+
+.featured-shop-img--short {
+  /* margin-top: 10px; */
+  /* border-radius: 10px; */
+  width: 445px;
+  height: 200px; 
+  margin: 0;
+  animation-name: fadeInPost;
+  animation-duration: 0.5s;
+  object-fit: scale-down;
+  background-color: white;
+}
 @keyframes fadeOutPost {
   from {
     filter: brightness(100%);

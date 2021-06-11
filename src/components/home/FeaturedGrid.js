@@ -21,7 +21,8 @@ function FeaturedGrid({blogPost}) {
     const randomURL = 'https://picsum.photos/seed/30/450/550'
     const randomURL2 = 'https://picsum.photos/seed/90/450/200'
     const randomURL3 = 'https://picsum.photos/seed/501/450/200'
-    const randomURL4 = 'https://picsum.photos/seed/405/450/200'
+    // const randomURL4 = 'https://picsum.photos/seed/405/450/200'
+    const randomURL4 = 'https://media.endclothing.com/media/catalog/product/2/2/22-07-2020_620969-TIV74-1070_1_1.jpg'
 
     const [recent, setRecent] = useState([{image: randomURL2}, {image:randomURL3}])
 
@@ -74,8 +75,8 @@ function FeaturedGrid({blogPost}) {
             </div>
             <div className="featured-container--short">
                 <h2>Latest Merchandise</h2>
-                <Button style={buttonStyle}>
-                    <img className="featured-img--short" src={randomURL4}/>
+                <Button style={buttonStyle} onClick={() => history.push('/shop')}>
+                    <img className="featured-shop-img--short" src={randomURL4}/>
                 </Button>
             </div>
         </div>
