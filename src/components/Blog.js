@@ -58,7 +58,7 @@ function Blog(){
                     {/* <TextField id="search-keyword" label="Enter Search" onChange={e => setInput(e.target.value)} defaultValue="canyon"/> */}
                     {/* <Button onClick={() => getSomePhotos()}>Search</Button> */}
                     <div style= {{display:"flex", justifyContent:"center"}}>
-                        <Button variant="contained" color="C7D8C6" onClick={() => history.push(`/addBlogPost`)}>Add Blog Post</Button>
+                        <Button variant="contained" onClick={() => history.push(`${match.path}/addBlogPost`)}>Add Blog Post</Button>
                     </div>
                     <br></br>
                     <Masonry
