@@ -17,26 +17,31 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import UpdateBlog from "./UpdateBlog";
+import { BlogPostContext } from "../BlogPostContext";
+// import UpdateBlog from "./UpdateBlog";
 
-export default function EditPost(props) {
-  const [blogData, setBlogData] = useState({
-    title: props.title,
-    date: props.date,
-    image: props.image,
-    content: props.content,
-    likes: props.likes,
-    comments: props.comments,
-    id: props.doc_id,
-  });
-
+export default function EditPost({props}) {
+  const [blogData, setBlogData] = useState(props);
   const [open, setOpen] = useState(false);
 
   const { edit, setEdit } = useContext(EditContext);
-
   const [selectedDate, setSelectedDate] = useState(new Date(blogData.date));
-
+  const {getPosts} = useContext(BlogPostContext);
   let link = "";
+
+  const UpdateBlog = (data) => {
+    console.log("update data", data);
+    fetch("/blog/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })      
+    .then(resp => console.log(resp))
+    .then(c => getPosts())
+      .catch(err => console.error('error:' + err));
+  }
 
   const handleOpen = () => {
     setOpen(true);
@@ -55,7 +60,7 @@ export default function EditPost(props) {
   };
 
   const handleSave = () => {
-    UpdateBlog(props);
+    UpdateBlog(blogData);
     setEdit(false);
   };
 
@@ -165,7 +170,7 @@ export default function EditPost(props) {
               <IconButton>
                 <FavoriteIcon style={{ color: "C7D8C6" }} />
               </IconButton>
-              {blogData.likes} likes
+              {blogData.likeCount} likes
             </div>
           </div>
           <div

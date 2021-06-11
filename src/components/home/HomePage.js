@@ -8,7 +8,7 @@ import ShopItems from '../ShopItems'
 import NavigationDrawer from './NavigationDrawer'
 import Blog from '../Blog'
 import '../../css/home-page.css'
-
+import BlogPostProvider from '../BlogPostContext'
 import {
     BrowserRouter as Router,
     Switch,
@@ -57,7 +57,9 @@ function HomePage() {
                    <ForumList/> 
                 </Route>
                 <Route path ={blog}>
-                    <Blog/>
+                    <BlogPostProvider>
+                        <Blog />
+                    </BlogPostProvider>
                 </Route>
                 <Route path ={shop}>
                     <ShopItems/>

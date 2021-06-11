@@ -4,7 +4,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { EditContext } from "./EditContext";
 import { Button } from "@material-ui/core";
 
-export default function ViewPost(props) {
+export default function ViewPost({props}) {
   const handleLike = () => {
     console.log("liked");
   };
@@ -58,7 +58,7 @@ export default function ViewPost(props) {
               <IconButton onClick={handleLike}>
                 <FavoriteIcon style={{ color: "C7D8C6" }} />
               </IconButton>
-              {props.likes} likes
+              {props.likeCount} likes
             </div>
           </div>
           <div
