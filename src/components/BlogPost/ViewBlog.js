@@ -5,6 +5,7 @@ import { EditContext } from "./EditContext";
 import { Button } from "@material-ui/core";
 
 export default function ViewPost({props}) {
+  // const [liked, setLiked] = useContext('false');
   const handleLike = () => {
     console.log("liked");
   };
