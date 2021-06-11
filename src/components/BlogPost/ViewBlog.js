@@ -4,6 +4,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { EditContext } from "./EditContext";
 import { Button } from "@material-ui/core";
 import { useAuth } from "../authentication/context/AuthContext"
+import BlogCommentList from './BlogCommentList'
 
 export default function ViewPost({props}) {
   const { isAdmin } = useAuth()
@@ -85,7 +86,7 @@ export default function ViewPost({props}) {
           </div>
           <div style={{ marginBottom: "5vh" }}>{props.content}</div>
           <div style={{ fontSize: "120%" }}>Comments</div>
-          <div>{props.comments}</div>
+          <div><BlogCommentList/></div>
         </div>
       </div>
     );

@@ -26,6 +26,20 @@ router.get("/getFromForum", async(req, res)=>{
         res.sendStatus(500)
     }
 })
+router.get("/getFromBlog", async(req, res)=>{
+    try{
+        const postID = req.query.postID
+        const commentsFiltered = await db.collection("comments").where('postID', '==', postID).get()
+        const commentsList = []
+        commentsFiltered.forEach((comment)=>{
+            commentsList.push({...comment.data(), doc_id:comment.id})
+        })
+        res.json(commentsList)
+    }catch(err){
+        console.log("Error in getFromForum: ", err)
+        res.sendStatus(500)
+    }
+})
 
 router.post("/add", async (req, res) => {
     const { content, date, dislikes, likes, postID, user, timestamp, ...rest } = req.body;
@@ -43,7 +57,24 @@ router.post("/add", async (req, res) => {
     const forumRef = db.collection("forums").doc(forumId)
     forumRef.update({commentCount: increment})
   
-    console.log("Added document to comments with ID: ", resp.id);
+    console.log("Added document to comments for forum with ID: ", resp.id);
+    res.sendStatus(200);
+  });
+
+  //like add, without increment update
+router.post("/addToBlog", async (req, res) => {
+    const { content, date, dislikes, likes, postID, user, timestamp, ...rest } = req.body;
+    const resp = await db.collection("comments").add({
+        content, 
+        date, 
+        dislikes, 
+        likes, 
+        postID, 
+        user,
+        timestamp
+    });
+  
+    console.log("Added document to comments for blog with ID: ", resp.id, " and postID = ", postID);
     res.sendStatus(200);
   });
 

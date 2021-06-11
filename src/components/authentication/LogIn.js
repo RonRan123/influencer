@@ -26,9 +26,6 @@ export default function LogIn() {
       setError("");
       setLoading(true);
       await login(email, password);
-      if(adminUsers.includes(currentUser.uid)){
-        console.log("Admin logged in")
-      }
       // console.log( currentUser.uid )
       history.push('/')
     } catch {
