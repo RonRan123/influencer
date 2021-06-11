@@ -22,6 +22,7 @@ import { Card } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CardActions from '@material-ui/core/CardActions';
 import Box from '@material-ui/core/Box';
+import { Redirect } from "react-router-dom";
 
 
 
@@ -52,7 +53,8 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     height: 700,
-    width: 500
+    width: 500,
+    justifyContent: 'center'
   },
   stripeModal: {
     width: 400,
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     height: 200  
   }
 }));
-export default function ShopItems(){
+export default function ShopCart(){
     const [products, setProducts] = React.useState();
     const classes = useStyles();
     const [cart1, setCart1] = React.useState();
@@ -174,43 +176,22 @@ export default function ShopItems(){
             
         })  
     };
-
-
-    
-
-   useEffect( () => {
+    useEffect( () => {
        getProducts();
        getCart();
    }, [])
+    
+  
+
+   
 
 //mapping through the shopping data 
 //putting the fields into different parts of a MUI card
 //wrapping it in a grid  
     return( 
         <div className = 'background'>   
-            <br></br>        
-            {/* <IconButton color="primary" aria-label="add to shopping cart" >   
-                <AddShoppingCartIcon onClick={handleOpen}/>
-            </IconButton>       */}
-            <div className={classes.root}>
-                <Grid container spacing={3} justify="center"> 
-                    {products && products.map((item, index) => 
-                    <div className={classes.root}> 
-                        <Paper className={classes.paper}> 
-                            <ShopCard id={index} info={item}/> 
-                            <div><br></br></div>
-                            <Box justifyContent='center'>
-                                <Button className='cart-button' variant='contained' onClick={() => handleAdd(item.title, item.price)}>Add to Cart</Button>
-                            </Box>
-                        </Paper>
-                        <br></br>
-                    </div>)}
-                </Grid>
-                <br></br>
                 <div>
-                <Modal aria-labelledby="transition-modal-title" className={classes.modal} open={open} onClose={handleClose} closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{ timeout: 500, }}>
-                    <Fade in={open}>
-                    <div className={classes.paperModal}>
+                    <div style={{display: 'flex', justifyContent:'center', padding: '50px'}}>
                         <h2 id="transition-modal-title">Your Cart: {cart1 && cart1.map((product) => 
                         <Card className={classes.cardMenu}>
                             <CardActions >
@@ -236,8 +217,10 @@ export default function ShopItems(){
                             </CardActions>
                         </Card> )}
                         </h2>
-                        <br></br>
-                        <Button variant = "contained" color = "primary" type="button" onClick={handleOpenStripe}>
+                    </div>
+                    <br></br>
+                    <div className="purchaseButton" style={{display: 'flex', justifyContent:'center'}}>
+                        <Button  type="button" variant = "contained" color = '#a9b7c0' onClick={handleOpenStripe}>
                             Click Here To Purchase
                         </Button>
                         <Modal aria-labelledby="transition-modal-title" className={classes.modal} open={openStripe} onClose={handleCloseStripe}closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{timeout: 500}}>
@@ -250,10 +233,8 @@ export default function ShopItems(){
                             </Fade>
                         </Modal>
                     </div>
-                    </Fade>
-                </Modal> 
+                <br></br>
                 </div>  
-            </div>  
-        </div>  
+            </div>
     );  
 }

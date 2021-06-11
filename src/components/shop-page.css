@@ -14,3 +14,7 @@
 .background {
   color: var(--minty-color);
 }
+
+.purchaseButton {
+  color: var(--minty-color);
+}

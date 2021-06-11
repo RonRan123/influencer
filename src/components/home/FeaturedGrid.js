@@ -46,7 +46,7 @@ function FeaturedGrid({blogPost}) {
             <div className="featured-container--long">
                 <h2>About Me</h2>
                 <img className="featured-img--long" src={randomURL}/>
-                <p>
+                <p className="blurb">
                     {blurbData}
                 </p>
             </div>

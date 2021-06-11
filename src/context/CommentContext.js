@@ -39,8 +39,17 @@ function CommentProvider({children}) {
             .catch(err=>{console.log("Add comment error: ", err)})
     }
 
+    const addCommentToBlog = (commentObj, postID) =>{
+        const url = new URL('http://localhost:8080/comments/addToBlog')
+        axios.post(url, commentObj)
+            .then(()=>{
+                getComments(postID)
+            })
+            .catch(err=>{console.log("Add comment error: ", err)})
+    } 
+
     return (
-        <CommentContext.Provider value={{comments, setComments, getComments, addComment}}>
+        <CommentContext.Provider value={{comments, setComments, getComments, addComment, addCommentToBlog}}>
             {children}
         </CommentContext.Provider>                    
     )

@@ -3,9 +3,12 @@ import { IconButton } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { EditContext } from "./EditContext";
 import { Button } from "@material-ui/core";
+import { useAuth } from "../authentication/context/AuthContext"
+import BlogCommentList from './BlogCommentList'
 
 export default function ViewPost({props}) {
   // const [liked, setLiked] = useContext('false');
+  const { isAdmin } = useAuth()
   const handleLike = () => {
     console.log("liked");
   };
@@ -23,16 +26,18 @@ export default function ViewPost({props}) {
       <div style={{ backgroundColor: "#F7F1F0" }}>
         <div style={{ height: "3vh" }}></div>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            onClick={handleEdit}
-            style={{
-              marginRight: "10vw",
-              backgroundColor: "#C7D8C6",
-              fontFamily: "'Martel', serif",
-            }}
-          >
-            EDIT
-          </Button>
+          {isAdmin() &&
+            <Button
+              onClick={handleEdit}
+              style={{
+                marginRight: "10vw",
+                backgroundColor: "#C7D8C6",
+                fontFamily: "'Martel', serif",
+              }}
+            >
+              EDIT
+            </Button>
+          }
         </div>
         <div
           style={{
@@ -82,7 +87,7 @@ export default function ViewPost({props}) {
           </div>
           <div style={{ marginBottom: "5vh" }}>{props.content}</div>
           <div style={{ fontSize: "120%" }}>Comments</div>
-          <div>{props.comments}</div>
+          <div><BlogCommentList/></div>
         </div>
       </div>
     );

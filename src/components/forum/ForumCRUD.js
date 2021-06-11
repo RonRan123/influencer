@@ -9,6 +9,7 @@ import {
 
 //forum context hook
 import { useForum } from '../../context/ForumContext'
+import { useAuth } from "../authentication/context/AuthContext";
 
 /**
  * Responsible for Create, Update, and Delete operations pertaining
@@ -18,6 +19,7 @@ import { useForum } from '../../context/ForumContext'
 function ForumCrud() {
     const [open, setOpen] = useState(true)
     const { addForum } = useForum()
+    const { currentUser } = useAuth()
 
     const inputStyle={
         padding:"5px",
@@ -43,7 +45,7 @@ function ForumCrud() {
         const forumObj = { 
             title: threadTitle, 
             date: dateFormat, 
-            user:"Camille", 
+            user:currentUser.displayName, 
             content:null,
             timestamp:Date.now(),
             commentCount: 0

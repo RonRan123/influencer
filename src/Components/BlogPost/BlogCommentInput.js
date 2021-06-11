@@ -3,7 +3,6 @@ import {
     Input,
     Button
 }from '@material-ui/core'
-import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useComment } from '../../context/CommentContext'
 import { useAuth } from "../authentication/context/AuthContext";
@@ -13,9 +12,9 @@ import { useAuth } from "../authentication/context/AuthContext";
  * to a forum/blog. This submits comments to the Cloud Firestore database
  * @returns 
  */
-function CommentInput() {
-    const { threadId } = useParams()
-    const { addComment } = useComment()
+function BlogCommentIinput() {
+    const { postID } = useParams()
+    const { addCommentToBlog } = useComment()
     const { currentUser } = useAuth()
 
     const handleSubmit = (e) => {
@@ -29,13 +28,13 @@ function CommentInput() {
                 content: comment, 
                 dislikes:0, 
                 likes: 0, 
-                postID: threadId, 
+                postID: postID, 
                 user:currentUser.displayName,
                 date: dateFormat,
                 timestamp: Date.now()
             }
 
-        addComment(commentObj, threadId)
+        addCommentToBlog(commentObj, postID)
     }
     const handleCancel = (e) => {
         e.preventDefault()
@@ -69,9 +68,8 @@ function CommentInput() {
                 </div> 
 
             </form>
-            <div className="comment-spacer-bottom"/>       
         </>
     )
 }
 
-export default CommentInput
+export default BlogCommentIinput
