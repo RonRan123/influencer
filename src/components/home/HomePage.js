@@ -8,7 +8,6 @@ import ShopItems from '../ShopItems'
 import NavigationDrawer from './NavigationDrawer'
 import Blog from '../Blog'
 import '../../css/home-page.css'
-import BlogPostProvider from '../BlogPostContext'
 import {
     BrowserRouter as Router,
     Switch,
@@ -21,6 +20,7 @@ import { home, blog, forum, shop, login, signup } from './routerPaths'
 import AvatorIcon from '../../icons/avatar.svg'
 
 
+
 /**
  * Home/Landing page containing navigation bar,
  * featured blog posts and shop items. 
@@ -28,9 +28,10 @@ import AvatorIcon from '../../icons/avatar.svg'
  * @returns Aesthetic landing page HTML
  */
 function HomePage() {
-
+    
     const fetchBlogs = () => {
         //code here to get featured blogs
+        
     }
 
     const fetchShopItems = () => {
@@ -57,9 +58,7 @@ function HomePage() {
                    <ForumList/> 
                 </Route>
                 <Route path ={blog}>
-                    <BlogPostProvider>
-                        <Blog />
-                    </BlogPostProvider>
+                    <Blog />
                 </Route>
                 <Route path ={shop}>
                     <ShopItems/>

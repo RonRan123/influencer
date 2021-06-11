@@ -6,7 +6,7 @@ import ImageCard from "./ImageCard"
 import '../css/Blog.css'
 import Masonry from 'react-masonry-css'
 import {useRouteMatch, Switch, Route} from "react-router-dom"
-import {BlogPostContext} from './BlogPostContext'
+import {BlogPostContext} from '../context/BlogPostContext'
 
 function Blog(){
     // const [posts, setPosts] = useState([]);

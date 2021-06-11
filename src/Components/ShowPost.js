@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import {useParams} from 'react-router-dom'
 import BlogPost from './BlogPost/BlogPost'
 import { CircularProgress } from '@material-ui/core'
-import {BlogPostContext} from './BlogPostContext';
+import {BlogPostContext} from '../context/BlogPostContext';
 
 function ShowPost(){
     const {postID} = useParams();
