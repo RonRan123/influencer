@@ -56,12 +56,17 @@ function HomeNavbar() {
     }
   };
 
+  const handleLogout = () => {
+    history.push(home)
+    logout()
+  }
+
   const loginOrlogout = () => {
     if (currentUser) {
       return (
         <Button
           name="logout"
-          onClick={logout}
+          onClick={handleLogout}
           classes={{ label: "navbutton-label" }}
         >
           Logout
