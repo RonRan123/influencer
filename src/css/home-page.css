@@ -8,13 +8,18 @@
 }
 
 /* Navigation Bar and its elements */
-h1 {
-  text-align: center;
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: var(--martel-font);
   font-weight: bolder;
   font-size: 45px;
   margin: 0;
   margin-top: 10px;
+}
+.header-img {
+  width: 80px;
 }
 .navbar {
   display: flex;

@@ -35,7 +35,7 @@ export default function LogIn() {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "15vh",
+          marginTop: "50px",
           fontFamily: "'Martel', serif",
         }}
       >
@@ -82,6 +82,7 @@ export default function LogIn() {
                 </Grid>
                 <Grid item>
                   <TextField
+                    type="password"
                     label="Password"
                     onChange={(e) => {
                       setPassword(e.target.value);
@@ -117,6 +118,7 @@ export default function LogIn() {
           justifyContent: "center",
           marginTop: "10px",
           fontFamily: "'Martel', serif",
+          marginBottom:"20vh",
         }}
       >
         Don't have an account? <Link to="/signup">Sign up</Link>

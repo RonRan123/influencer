@@ -2,7 +2,6 @@ import React from 'react'
 import {
     Button
 }from '@material-ui/core'
-
 const blurbData = `Camille is a world-famous model who has only ever wanted to be normal, 
 even though her mother has always pushed her to become a superstar. Now, she's a college dropout,
 working as a social media influencer to make the world a more positive place.`
@@ -16,9 +15,10 @@ working as a social media influencer to make the world a more positive place.`
 function FeaturedGrid({blogPost}) {
 
     //temporary function to get random pics
-    const randomURL = 'https://picsum.photos/450/550'
-    const randomURL2 = 'https://picsum.photos/450/200'
-    const randomURL3 = 'https://picsum.photos/450/200'
+    const randomURL = 'https://picsum.photos/seed/30/450/550'
+    const randomURL2 = 'https://picsum.photos/seed/90/450/200'
+    const randomURL3 = 'https://picsum.photos/seed/501/450/200'
+    const randomURL4 = 'https://picsum.photos/seed/405/450/200'
 
     const buttonStyle={
         margin:0,
@@ -51,7 +51,7 @@ function FeaturedGrid({blogPost}) {
             </div>
             <div className="featured-container--short">
                 <Button style={buttonStyle}>
-                    <img className="featured-img--short" src={randomURL3}/>
+                    <img className="featured-img--short" src={randomURL4}/>
                 </Button>
             </div>
         </div>

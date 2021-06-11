@@ -9,7 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import {
     useHistory
 } from "react-router-dom";
-import { home, blog, forum, shop } from './routerPaths'
+import { home, blog, forum, shop, login } from './routerPaths'
 import { useForum } from '../../context/ForumContext'
 /**
  * Navigation bar for Home, Blog, Forum, and Shop.
@@ -20,10 +20,11 @@ import { useForum } from '../../context/ForumContext'
 function HomeNavbar() {
     const history = useHistory()
     const { fetchAllThreads }  = useForum()
-    const [navSelector, setNavSelector] = useState({home:true, blog:false, forum:false, shop:false})
+    const [navSelector, setNavSelector] = useState({home:true, blog:false, 
+                                                    forum:false, shop:false, login:false})
     const handleClick= (e)=>{
         const selectorName = e.currentTarget.name
-        const navSelectorNone = {home:false, blog:false, forum:false, shop:false}
+        const navSelectorNone = {home:false, blog:false, forum:false, shop:false, login:false}
         setNavSelector({...navSelectorNone, [selectorName]:true})
         switch(selectorName){
             case "home":
@@ -39,10 +40,14 @@ function HomeNavbar() {
             case "shop":
                 history.push(shop)
                 break;
+            case "login":
+                history.push(login)
+                break;
             default:
                 return
         }
     }
+
 
     const handleForumRefresh = ()=>{
         fetchAllThreads()
@@ -64,14 +69,15 @@ function HomeNavbar() {
                 </div>
         
             </div>
-            <div className="search-bar">
+            {/* <div className="search-bar">
                 <IconButton> 
                     <SearchIcon/>
                 </IconButton>
                 <Input disableUnderline={true} classes={{root:"search-bar__form"}} id="search-input" placeholder={"Search"}/>
+            </div> */}
+            <div className={navSelector.login ? "navbutton--border" : "navbutton"}>
+                <Button name="login" onClick={handleClick} classes={{label:"navbutton-label"}}>Login</Button>
             </div>
-  
-            <Button classes={{label:"navbutton-label"}}>Login</Button>
         </div>
     )
 }

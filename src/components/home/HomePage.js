@@ -2,6 +2,8 @@ import React from 'react'
 import FeaturedGrid from './FeaturedGrid'
 import HomeNavbar from './HomeNavbar'
 import Footer from './Footer'
+import LogIn from "../authentication/LogIn"
+import SignUp from '../authentication/SignUp'
 import ShopItems from '../ShopItems'
 import NavigationDrawer from './NavigationDrawer'
 import Blog from '../Blog'
@@ -15,7 +17,8 @@ import {
 
 //testing
 import ForumList from '../forum/ForumList'
-import { home, blog, forum, shop } from './routerPaths'
+import { home, blog, forum, shop, login, signup } from './routerPaths'
+import AvatorIcon from '../../icons/avatar.svg'
 
 
 /**
@@ -37,7 +40,8 @@ function HomePage() {
     //use clsx to manage button look when selected
     return (
         <Router>
-            <h1>
+            <h1 className="header">
+                <img className="header-img" src={AvatorIcon} />
                 Camille's Corner
             </h1>
             <HomeNavbar/>
@@ -57,6 +61,12 @@ function HomePage() {
                 </Route>
                 <Route path ={shop}>
                     <ShopItems/>
+                </Route>
+                <Route path={login}>
+                    <LogIn/>
+                </Route>
+                <Route path={signup}>
+                    <SignUp/>
                 </Route>
             </Switch>
             

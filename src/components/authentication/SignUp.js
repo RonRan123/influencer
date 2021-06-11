@@ -41,7 +41,7 @@ export default function SignUp() {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "15vh",
+          marginTop: "50px",
           fontFamily: "'Martel', serif",
         }}
       >
@@ -89,6 +89,7 @@ export default function SignUp() {
                 </Grid>
                 <Grid item>
                   <TextField
+                    type="password"
                     label="Password"
                     onChange={(e) => {
                       setFirstPW(e.target.value);
@@ -113,6 +114,7 @@ export default function SignUp() {
                 </Grid>
                 <Grid item>
                   <TextField
+                    type="password"
                     label="Retype Password"
                     onChange={(e) => {
                       setSecondPW(e.target.value);
@@ -147,6 +149,7 @@ export default function SignUp() {
           justifyContent: "center",
           marginTop: "10px",
           fontFamily: "'Martel', serif",
+          marginBottom:"20vh",
         }}
       >
         Already have an account? <Link to="/login">Log in</Link>

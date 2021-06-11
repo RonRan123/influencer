@@ -1,7 +1,9 @@
-const {home, blog, forum, shop} = {
+const {home, blog, forum, shop, login, signup} = {
     home:"/", 
     blog:"/blog", 
     forum:"/forum", 
-    shop:"/shop"
+    shop:"/shop",
+    login:"/login",
+    signup:"/signup"
 }
-export { home, blog, forum, shop }
+export { home, blog, forum, shop, login, signup }

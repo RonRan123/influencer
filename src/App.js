@@ -1,7 +1,6 @@
 import "./App.css";
 import React from "react";
 import SignUp from "./components/authentication/SignUp";
-import LogIn from "./components/authentication/LogIn";
 import { AuthProvider } from "./components/authentication/context/AuthContext";
 import HomePage from './components/home/HomePage';
 import FormProvider from './context/ForumContext';

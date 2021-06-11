@@ -21,7 +21,7 @@ import{
 import {
   useHistory
 } from "react-router-dom";
-import { home, blog, forum, shop } from './routerPaths'
+import { home, blog, forum, shop, login } from './routerPaths'
 
 /**
  * Dropdown navigation drawer that appears when the screen width is under 700px
@@ -65,7 +65,7 @@ export default function NavigationDrawer() {
             <ListItemIcon><LocalMallIcon/></ListItemIcon>
             <ListItemText primary={"Shop"} />
         </ListItem>
-        <ListItem onClick={()=>{console.log("To be done")}} style={listItemStyle} button>
+        <ListItem onClick={()=>{history.push(login)}} style={listItemStyle} button>
             <ListItemIcon><AccountCircleIcon/></ListItemIcon>
             <ListItemText primary={"Login"} />
         </ListItem>
