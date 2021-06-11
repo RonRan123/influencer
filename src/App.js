@@ -2,18 +2,17 @@ import "./App.css";
 import React from "react";
 import SignUp from "./components/authentication/SignUp";
 import { AuthProvider } from "./components/authentication/context/AuthContext";
-import HomePage from './components/home/HomePage';
-import FormProvider from './context/ForumContext';
-import CommentProvider from './context/CommentContext';
+import HomePage from "./components/home/HomePage";
+import FormProvider from "./context/ForumContext";
+import CommentProvider from "./context/CommentContext";
 
 function App() {
   return (
     <AuthProvider>
       <div>
-        {/* <LogIn /> */}
         <FormProvider>
           <CommentProvider>
-            <HomePage/>
+            <HomePage />
           </CommentProvider>
         </FormProvider>
       </div>
