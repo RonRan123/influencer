@@ -127,6 +127,10 @@
   margin: 0;
 }
 .featured-container--short {
+  width: 445px;
+  /* height: 200px; */
+  overflow: hidden;
+  position: relative;
   padding-top: 10px;
   grid-column-start: 2;
   margin: 0;
@@ -139,13 +143,14 @@
   margin: 0;
 }
 .featured-img--short {
-  margin-top: 10px;
-  border-radius: 10px;
+  /* margin-top: 10px; */
+  /* border-radius: 10px; */
   width: 445px;
   height: 200px; 
   margin: 0;
   animation-name: fadeInPost;
   animation-duration: 0.5s;
+  object-fit: cover;
 }
 @keyframes fadeOutPost {
   from {

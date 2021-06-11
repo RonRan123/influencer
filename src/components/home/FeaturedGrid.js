@@ -68,12 +68,12 @@ function FeaturedGrid({blogPost}) {
                 </Button>
             </div>
             <div className="featured-container--short">
-                <h2>Latest Merchandise</h2>
                 <Button style={buttonStyle} onClick={() => history.push(`/blog/${recent[1].doc_id}`)}>
                     <img className="featured-img--short" src={recent[1].image}/>
                 </Button>
             </div>
             <div className="featured-container--short">
+                <h2>Latest Merchandise</h2>
                 <Button style={buttonStyle}>
                     <img className="featured-img--short" src={randomURL4}/>
                 </Button>
