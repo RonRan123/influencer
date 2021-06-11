@@ -3,7 +3,7 @@ import "../../css/home-page.css";
 import { Button, Input, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useHistory } from "react-router-dom";
-import { home, blog, forum, shop, login } from "./routerPaths";
+import { home, blog, forum, shop, login, cart } from "./routerPaths";
 import { useForum } from "../../context/ForumContext";
 import { useAuth } from "../authentication/context/AuthContext";
 import PersonIcon from "@material-ui/icons/Person";
@@ -23,6 +23,7 @@ function HomeNavbar() {
     forum: false,
     shop: false,
     login: false,
+    cart: false
   });
   const handleClick = (e) => {
     const selectorName = e.currentTarget.name;
@@ -32,6 +33,7 @@ function HomeNavbar() {
       forum: false,
       shop: false,
       login: false,
+      cart: false
     };
     setNavSelector({ ...navSelectorNone, [selectorName]: true });
     switch (selectorName) {
@@ -47,6 +49,9 @@ function HomeNavbar() {
         break;
       case "shop":
         history.push(shop);
+        break;
+      case "cart":
+        history.push(cart)
         break;
       case "login":
         history.push(login);
@@ -126,6 +131,9 @@ function HomeNavbar() {
           >
             Shop
           </Button>
+        </div>
+        <div className={navSelector.cart ? "navbutton--border" : "navbutton"}>
+            <Button name="cart" onClick={handleClick} classes={{label:"navbutton-label"}}>Cart</Button>
         </div>
       </div>
       {/* <div className="search-bar">
