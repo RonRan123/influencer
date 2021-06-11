@@ -143,10 +143,10 @@
   border-radius: 10px;
   width: 445px;
   margin: 0;
-  animation-name: fadeIn;
+  animation-name: fadeInPost;
   animation-duration: 0.5s;
 }
-@keyframes fadeOut {
+@keyframes fadeOutPost {
   from {
     filter: brightness(100%);
   }
@@ -154,7 +154,7 @@
     filter: brightness(50%);
   }
 }
-@keyframes fadeIn {
+@keyframes fadeInPost {
   from {
     filter: brightness(50%);
   }
@@ -163,7 +163,7 @@
   }
 }
 .featured-img--short:hover {
-  animation-name: fadeOut;
+  animation-name: fadeOutPost;
   animation-duration: 0.5s;
   filter: brightness(50%);
 }
