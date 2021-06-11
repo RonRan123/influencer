@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary, 
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#cccbc6'
 
   },
   modal: {
@@ -200,7 +201,7 @@ export default function ShopItems(){
                             <ShopCard id={index} info={item}/> 
                             <div><br></br></div>
                             <Box justifyContent='center'>
-                                <Button className='cart-button' variant='contained' onClick={() => handleAdd(item.title, item.price)}>Add to Cart</Button>
+                                <Button style ={{backgroundColor: '#a9b7c0'}} variant='contained' onClick={() => handleAdd(item.title, item.price)}>Add to Cart</Button>
                             </Box>
                         </Paper>
                         <br></br>
