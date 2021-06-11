@@ -11,12 +11,25 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+  function signup(email, password, name) {
+    return auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(function (result) {
+        return result.user.updateProfile({
+          displayName: name,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
+  }
+
+  function logout() {
+    return auth.signOut();
   }
 
   useEffect(() => {
@@ -32,6 +45,7 @@ export function AuthProvider({ children }) {
     currentUser,
     login,
     signup,
+    logout,
   };
 
   return (

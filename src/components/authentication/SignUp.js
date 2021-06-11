@@ -5,6 +5,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
 import { useAuth } from "./context/AuthContext";
 import { Link } from "react-router-dom";
+import PersonIcon from "@material-ui/icons/Person";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ export default function SignUp() {
   const [firstPW, setFirstPW] = useState("");
 
   const [secondPW, setSecondPW] = useState("");
+
+  const [name, setName] = useState("");
 
   const [error, setError] = useState("");
 
@@ -27,7 +30,8 @@ export default function SignUp() {
     try {
       setError("");
       setLoading(true);
-      await signup(email, firstPW);
+      await signup(email, firstPW, name);
+      // currentUser.displayName = name;
     } catch {
       setError("Failed to create an account");
     }
@@ -56,9 +60,37 @@ export default function SignUp() {
           >
             Sign Up
           </div>
-          {/* {currentUser.email} */}
           {error && <Alert severity="error">{error}</Alert>}
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+          >
+            <div>
+              <Grid container spacing={1} alignItems="flex-end">
+                <Grid item>
+                  <PersonIcon />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    label="Name"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+          >
             <div>
               <Grid container spacing={1} alignItems="flex-end">
                 <Grid item>
@@ -79,7 +111,7 @@ export default function SignUp() {
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: "40px",
+              marginBottom: "10px",
             }}
           >
             <div>
@@ -104,7 +136,7 @@ export default function SignUp() {
               display: "flex",
               justifyContent: "center",
               marginTop: "10px",
-              marginBottom: "80px",
+              marginBottom: "60px",
             }}
           >
             <div>
@@ -149,7 +181,7 @@ export default function SignUp() {
           justifyContent: "center",
           marginTop: "10px",
           fontFamily: "'Martel', serif",
-          marginBottom:"20vh",
+          marginBottom: "20vh",
         }}
       >
         Already have an account? <Link to="/login">Log in</Link>
