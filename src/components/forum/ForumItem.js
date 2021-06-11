@@ -16,14 +16,19 @@ import { IconButton } from '@material-ui/core'
 import DeleteController from './crud_helpers/DeleteController'
 
 import axios from 'axios'
+
+//Context
+import { useForum } from '../../context/ForumContext'
+
 /**
  * Component for displaying an individual forum post. Is a child of ForumList.js
  * Also handles edit and delete operations for an individual form post
  * @param {*} forumItem Contains data for individual forum post
  * @returns 
  */
-function ForumItem({forumItem, setAllThreads}) {
+function ForumItem({forumItem}) {
     const history = useHistory()
+    const { setAllThreads } = useForum()//setAllThreads from ForumContext used to update forum array
     const [editMode, setEditMode] = useState(false)
     const [deleteMode, setDeleteMode] = useState(false)
     let match = useRouteMatch()
@@ -38,6 +43,7 @@ function ForumItem({forumItem, setAllThreads}) {
     }
     const getNumComments = () =>{
         //will be used to get number of comments relating to forum post
+        //use comment context to do so...(have a function to fetch from specific id)
     }
     const handleThreadRoute = ()=>{
         history.push(`${match.url}/${forumItem.doc_id}`)
@@ -81,7 +87,7 @@ function ForumItem({forumItem, setAllThreads}) {
                         <h3>{forumItem.title}</h3>
                         <p className="forum">Posted by <b>{forumItem.user}</b> on <b>{forumItem.date}</b></p>
                         <p className="stats">
-                            <CommentIcon/> {'104'} Comments
+                            <CommentIcon/> {forumItem.commentCount} Comments
                         </p>
                         
                     </CardContent>
@@ -90,7 +96,7 @@ function ForumItem({forumItem, setAllThreads}) {
                     <Input id="edit-input" style={editInputStyle} multiline={true} defaultValue={forumItem.title}/>
                     <p className="forum">Posted by <b>{forumItem.user}</b> on <b>{forumItem.date}</b></p>
                     <p className="stats">
-                        <CommentIcon/> {'104'} Comments
+                        <CommentIcon/> {forumItem.commentCount} Comments
                     </p>
                 </CardContent>
                 }

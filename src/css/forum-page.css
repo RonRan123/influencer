@@ -79,8 +79,6 @@ h3 {
   display: flex;
   justify-content: flex-start;
   margin: 5px;
-  animation-name: fadeIn;
-  animation-duration: 0.5s;
 }
 
 /* Forum comments  */
@@ -233,5 +231,27 @@ h3 {
   width: 100px;
   height: 100px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@keyframes firstGrow {
+  from {
+    height: 0px;
+    opacity: 0;
+  }
+  to {
+    height: 100px;
+    opacity: 1;
+  }
+}
+.first-comment {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-name: firstGrow;
+  animation-duration: 0.5s;
+  height: 100px;
 }

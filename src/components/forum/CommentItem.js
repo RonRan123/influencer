@@ -12,21 +12,16 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import DeleteController from './crud_helpers/DeleteController';
-// const commentItemData = {
-//     date:"6/8/2021",
-//     text:"I don't know lol. This is a silly question",
-//     likes:100,
-//     dislikes:200,
-//     user:{name:"Adriel Kim"},//ideally would be an ID referencing the user
-// }
+import { useComment } from '../../context/CommentContext'
+
 /**
  * Prop displaying a comment on a forum or blog post.
  * @param {*} commentItem prop containing data of a single comment
  * @returns 
  */
-function CommentItem({commentItem, setComments}) {
-
+function CommentItem({commentItem}) {
     const [deleteMode, setDeleteMode] = useState(false)
+    const { setComments } = useComment()
 
     const cardStyle={
         width:"850px",

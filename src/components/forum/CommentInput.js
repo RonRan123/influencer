@@ -5,23 +5,16 @@ import {
 }from '@material-ui/core'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { useComment } from '../../context/CommentContext'
 
 /**
  * Form component that lets users submit their own comments
  * to a forum/blog. This submits comments to the Cloud Firestore database
  * @returns 
  */
-function CommentInput({setComments, fetchComments}) {
+function CommentInput() {
     const { threadId } = useParams()
-
-    const addComment = (commentObj) => {
-        const url = new URL('http://localhost:8080/comments/add')
-        axios.post(url, commentObj)
-            .then(()=>{
-                fetchComments()
-            })
-            .catch(err=>{console.log("Add comment error: ", err)})
-    }
+    const { addComment } = useComment()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -36,11 +29,11 @@ function CommentInput({setComments, fetchComments}) {
                 likes: 0, 
                 postID: threadId, 
                 user:null,
-                date: dateFormat
+                date: dateFormat,
+                timestamp: Date.now()
             }
 
-        addComment(commentObj)
-        // setComments(comments=>[commentObj, ...comments])
+        addComment(commentObj, threadId)
     }
     const handleCancel = (e) => {
         e.preventDefault()

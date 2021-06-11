@@ -12,12 +12,14 @@ router.get("/get", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-    const { content, date, title, user, ...rest } = req.body;
+    const { content, date, title, user, timestamp, commentCount, ...rest } = req.body;
     const resp = await db.collection("forums").add({
         content, 
         date, 
         title,
-        user
+        user,
+        timestamp,
+        commentCount
     });
   
     console.log("Added document to forums with ID: ", resp.id);

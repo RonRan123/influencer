@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const db = require("../firebase");
+const admin = require("firebase-admin");
 
 router.get("/get", async (req, res) => {
     const snapshot = await db.collection("comments").get();
@@ -27,15 +28,20 @@ router.get("/getFromForum", async(req, res)=>{
 })
 
 router.post("/add", async (req, res) => {
-    const { content, date, dislikes, likes, postID, user, ...rest } = req.body;
+    const { content, date, dislikes, likes, postID, user, timestamp, ...rest } = req.body;
+    const forumId = req.query.forumId
     const resp = await db.collection("comments").add({
         content, 
         date, 
         dislikes, 
         likes, 
         postID, 
-        user
+        user,
+        timestamp
     });
+    const increment = admin.firestore.FieldValue.increment(1)
+    const forumRef = db.collection("forums").doc(forumId)
+    forumRef.update({commentCount: increment})
   
     console.log("Added document to comments with ID: ", resp.id);
     res.sendStatus(200);

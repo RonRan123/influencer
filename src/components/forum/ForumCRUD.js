@@ -6,13 +6,19 @@ import {
     ButtonGroup,
     Input
 } from '@material-ui/core'
+
+//forum context hook
+import { useForum } from '../../context/ForumContext'
+
 /**
  * Responsible for Create, Update, and Delete operations pertaining
  * to the forum posts
  * @returns 
  */
-function ForumCrud({fetchAllThreads}) {
+function ForumCrud() {
     const [open, setOpen] = useState(true)
+    const { addForum } = useForum()
+
     const inputStyle={
         padding:"5px",
         fontFamily:"Martel",
@@ -22,15 +28,6 @@ function ForumCrud({fetchAllThreads}) {
         width:"100%",
         fontFamily:"Martel",
         fontWeight:"bold",
-    }
-    
-    const AddForum = (forumObj) =>{
-        const url = new URL('http://localhost:8080/forums/add')
-        axios.post(url, forumObj)
-            .then(()=>{
-                fetchAllThreads()
-            })
-            .catch(err=>console.log("Error Adding Forum: ", err))
     }
 
     const handleOpen = () =>{
@@ -43,8 +40,15 @@ function ForumCrud({fetchAllThreads}) {
         e.target["forum-input"].value=""
         const today = new Date();
         const dateFormat = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}` 
-        const forumObj = { title: threadTitle, date: dateFormat, user:"Dummy", content:null}
-        AddForum(forumObj)
+        const forumObj = { 
+            title: threadTitle, 
+            date: dateFormat, 
+            user:"Camille", 
+            content:null,
+            timestamp:Date.now(),
+            commentCount: 0
+        }
+        addForum(forumObj)
     }
 
     return (

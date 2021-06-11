@@ -10,6 +10,7 @@ import {
     useHistory
 } from "react-router-dom";
 import { home, blog, forum, shop } from './routerPaths'
+import { useForum } from '../../context/ForumContext'
 /**
  * Navigation bar for Home, Blog, Forum, and Shop.
  * This is where routing is handled. Note that route paths are defined in "routerPaths.js"
@@ -18,6 +19,7 @@ import { home, blog, forum, shop } from './routerPaths'
 
 function HomeNavbar() {
     const history = useHistory()
+    const { fetchAllThreads }  = useForum()
     const [navSelector, setNavSelector] = useState({home:true, blog:false, forum:false, shop:false})
     const handleClick= (e)=>{
         const selectorName = e.currentTarget.name
@@ -32,6 +34,7 @@ function HomeNavbar() {
                 break;
             case "forum":
                 history.push(forum)
+                handleForumRefresh()
                 break;
             case "shop":
                 history.push(shop)
@@ -39,6 +42,10 @@ function HomeNavbar() {
             default:
                 return
         }
+    }
+
+    const handleForumRefresh = ()=>{
+        fetchAllThreads()
     }
     return (
         <div className="navbar">

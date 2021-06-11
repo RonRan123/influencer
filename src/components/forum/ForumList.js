@@ -13,6 +13,10 @@ import {
   } from "react-router-dom";
 import { CircularProgress } from '@material-ui/core'
 import axios from 'axios'
+
+//Context hook for interacting with forum data
+import { useForum } from '../../context/ForumContext' 
+
 /**
  * List of all forum posts. New forum posts can be started by users. 
  * Edit and delete permissions will be reserved for the admin of the site.
@@ -20,37 +24,20 @@ import axios from 'axios'
  */
 function ForumList() {
     const {path, url} = useRouteMatch()
-    const [allThreads, setAllThreads] = useState([])
+    const { allThreads, setAllThreads, fetchAllThreads } = useForum()
 
-    useEffect(()=>{
-        fetchAllThreads()
-    }, [])
-
-    //TO DO: Sort by timestamp (add time stamp in post request)
-    const fetchAllThreads = () =>{
-        const url = new URL('http://localhost:8080/forums/get')
-        console.log("fetch threads")
-        axios.get(url)
-            .then(response=>{
-                setAllThreads(response.data)
-                console.log(response.data)
-            })
-            .catch(err=>{
-                console.log("Error: ", err)
-            })
-    }
     return (
         <> 
             <Switch>
                 <Route exact path={path}>
-                    <ForumCRUD fetchAllThreads={fetchAllThreads}/>
+                    <ForumCRUD />
           
                     {allThreads.length > 0
                         ?
                         <div className="forum-frame">
                             {
                                 allThreads.map((forumObj)=>{
-                                    return (<ForumItem key={forumObj.doc_id} forumItem={forumObj} setAllThreads={setAllThreads}/>)
+                                    return (<ForumItem key={forumObj.doc_id} forumItem={forumObj}/>)
                                 })
                             }
                         </div>
