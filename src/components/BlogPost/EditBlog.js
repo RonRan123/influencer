@@ -17,7 +17,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { BlogPostContext } from "../BlogPostContext";
+import { BlogPostContext } from "../../context/BlogPostContext";
 // import UpdateBlog from "./UpdateBlog";
 
 export default function EditPost({props}) {

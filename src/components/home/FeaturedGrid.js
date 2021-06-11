@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
     Button
 }from '@material-ui/core'
+import { BlogPostContext } from '../../context/BlogPostContext';
+import { useHistory } from 'react-router';
 const blurbData = `Camille is a world-famous model who has only ever wanted to be normal, 
 even though her mother has always pushed her to become a superstar. Now, she's a college dropout,
 working as a social media influencer to make the world a more positive place.`
@@ -13,12 +15,16 @@ working as a social media influencer to make the world a more positive place.`
  * @returns 
  */
 function FeaturedGrid({blogPost}) {
-
+    const {posts} = useContext(BlogPostContext);
+    const history = useHistory();
     //temporary function to get random pics
     const randomURL = 'https://picsum.photos/seed/30/450/550'
     const randomURL2 = 'https://picsum.photos/seed/90/450/200'
     const randomURL3 = 'https://picsum.photos/seed/501/450/200'
-    const randomURL4 = 'https://picsum.photos/seed/405/450/200'
+    // const randomURL4 = 'https://picsum.photos/seed/405/450/200'
+    const randomURL4 = 'https://media.endclothing.com/media/catalog/product/2/2/22-07-2020_620969-TIV74-1070_1_1.jpg'
+
+    const [recent, setRecent] = useState([{image: randomURL2}, {image:randomURL3}])
 
     const buttonStyle={
         margin:0,
@@ -26,6 +32,25 @@ function FeaturedGrid({blogPost}) {
         borderRadius:"10px"
     }
 
+
+    useEffect(() => {
+        if (posts.length === 0){
+            console.log("oops")
+        }
+        else{
+            const sorted = [...posts].sort(function(a, b) {
+                var keyA = new Date(a.date),
+                  keyB = new Date(b.date);
+                // Compare the 2 dates
+                if (keyA < keyB) return -1;
+                if (keyA > keyB) return 1;
+                return 0;
+            });
+            setRecent(sorted);
+            console.log(sorted[0]);
+            console.log(recent);
+        }
+    }, [posts])
     return (
         <div className="featured-blogs">
             <div className="featured-container--long">
@@ -35,23 +60,23 @@ function FeaturedGrid({blogPost}) {
                     {blurbData}
                 </p>
             </div>
-            <div className="featured-container--short">
+            <div className="featured-container--short" onClick={() => history.push(`/blog/${recent[0].doc_id}`)}>
                 <h2>Latest Blog Post</h2>
                 <Button style={buttonStyle}>
-                    <img className="featured-img--short" src={randomURL2}/>
+                    <img className="featured-img--short" src={recent[0].image}/>
                     {/* <div className="overlaid-text">overlain text</div> */}
 
                 </Button>
             </div>
             <div className="featured-container--short">
-                <h2>Latest Merchandise</h2>
-                <Button style={buttonStyle}>
-                    <img className="featured-img--short" src={randomURL3}/>
+                <Button style={buttonStyle} onClick={() => history.push(`/blog/${recent[1].doc_id}`)}>
+                    <img className="featured-img--short" src={recent[1].image}/>
                 </Button>
             </div>
             <div className="featured-container--short">
-                <Button style={buttonStyle}>
-                    <img className="featured-img--short" src={randomURL4}/>
+                <h2>Latest Merchandise</h2>
+                <Button style={buttonStyle} onClick={() => history.push('/shop')}>
+                    <img className="featured-shop-img--short" src={randomURL4}/>
                 </Button>
             </div>
         </div>

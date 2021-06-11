@@ -5,6 +5,8 @@ import { AuthProvider } from "./components/authentication/context/AuthContext";
 import HomePage from './components/home/HomePage';
 import FormProvider from './context/ForumContext';
 import CommentProvider from './context/CommentContext';
+import BlogPostProvier from './context/BlogPostContext';
+import BlogPostProvider from "./context/BlogPostContext";
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
       <div>
         <FormProvider>
           <CommentProvider>
-            <HomePage/>
+            <BlogPostProvider>
+              <HomePage/>
+            </BlogPostProvider>
           </CommentProvider>
         </FormProvider>
       </div>
