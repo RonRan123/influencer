@@ -48,7 +48,7 @@ function Blog(){
         1100: 2,
         700: 1
     }
-    console.log("posts", posts);
+    // console.log("posts", posts);
     return (
         <Switch>
             <Route exact path={match.path}>

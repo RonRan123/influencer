@@ -12,7 +12,7 @@ function ShowPost(){
         const findPost = posts.find(p => p.doc_id === postID);
         console.log("findPost", findPost);
         setDisplay(findPost);
-    }, []);
+    }, [posts]);
     return (
         <>
             {display !== undefined?<BlogPost props={display}/>:<div className="circular-progress"><CircularProgress style={{display:'flex'}}/></div>}
