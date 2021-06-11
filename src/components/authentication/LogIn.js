@@ -15,13 +15,14 @@ export default function LogIn() {
 
   const [loading, setLoading] = useState(false);
 
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
 
   async function handleSubmit() {
     try {
       setError("");
       setLoading(true);
       await login(email, password);
+      console.log( currentUser.uid )
     } catch {
       setError("Failed to log in");
     }

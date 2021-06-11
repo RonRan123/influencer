@@ -10,14 +10,12 @@ function App() {
   return (
     <AuthProvider>
       <div>
-        {/* <LogIn /> */}
         <FormProvider>
           <CommentProvider>
             <HomePage/>
           </CommentProvider>
         </FormProvider>
       </div>
-      );
     </AuthProvider>
   );
 }
