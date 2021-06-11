@@ -65,7 +65,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   }, 
   cardMenu: {
-    height: 200  
+    height: 200,
+    justifyContent: 'right' ,
+    display:'flex' 
   }
 }));
 export default function ShopCart(){
@@ -195,7 +197,8 @@ export default function ShopCart(){
                         <h2 id="transition-modal-title">Your Cart: {cart1 && cart1.map((product) => 
                         <Card className={classes.cardMenu}>
                             <CardActions >
-                            <div>{product.title} - ${product.price} 
+                            <div>{product.title} - ${product.price} </div>
+                            <div>
                             <List component="nav" aria-label="Device settings">
                                 <ListItem button aria-haspopup="true"aria-controls="lock-menu" aria-label="Click To Select Size" onClick={handleClickListItem}>
                                     <ListItemText primary="Click To Select Size" secondary={options[selectedIndex]} />
@@ -218,9 +221,8 @@ export default function ShopCart(){
                         </Card> )}
                         </h2>
                     </div>
-                    <br></br>
                     <div className="purchaseButton" style={{display: 'flex', justifyContent:'center'}}>
-                        <Button  type="button" variant = "contained" color = '#a9b7c0' onClick={handleOpenStripe}>
+                        <Button  type="button" variant = "contained" style={{backgroundColor:'#c7d8c6'}} onClick={handleOpenStripe}>
                             Click Here To Purchase
                         </Button>
                         <Modal aria-labelledby="transition-modal-title" className={classes.modal} open={openStripe} onClose={handleCloseStripe}closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{timeout: 500}}>
