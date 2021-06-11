@@ -10,6 +10,7 @@ import axios from 'axios'
 
 //comment data context
 import { useComment } from '../../context/CommentContext'
+import { useAuth } from "../authentication/context/AuthContext"
 
 /**
  * List of comments displayed under a forum or blog post
@@ -18,6 +19,7 @@ import { useComment } from '../../context/CommentContext'
  */
 function CommentList() {
     const { threadId } = useParams()
+    const { currentUser } = useAuth()
     const { comments, setComments, getComments } = useComment()
     useEffect(()=>{
         setComments([])
@@ -44,7 +46,10 @@ function CommentList() {
                 {/* <CircularProgress style={{width:"100%", height:"100%"}}/> */}
             </div>
             }
-            <CommentInput setComments={setComments} fetchComments={getComments} />
+            {currentUser ?
+                <CommentInput setComments={setComments} fetchComments={getComments} />
+                :<div style={{marginBottom:"60vh"}}/>
+            }
         </div>
     )
 }

@@ -4,7 +4,7 @@ import { Alert } from "@material-ui/lab";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
 import { useAuth } from "./context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -19,6 +19,8 @@ export default function SignUp() {
 
   const { signup, currentUser } = useAuth();
 
+  const history = useHistory()
+
   async function handleSubmit() {
     if (firstPW !== secondPW) {
       return setError("Passwords do not match");
@@ -28,6 +30,7 @@ export default function SignUp() {
       setError("");
       setLoading(true);
       await signup(email, firstPW);
+      history.push("login")
     } catch {
       setError("Failed to create an account");
     }

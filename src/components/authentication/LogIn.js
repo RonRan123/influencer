@@ -4,7 +4,9 @@ import { Alert } from "@material-ui/lab";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
 import { useAuth } from "./context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import adminUsers from '../authentication/adminUsers'
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
@@ -17,12 +19,18 @@ export default function LogIn() {
 
   const { login, currentUser } = useAuth();
 
+  const history = useHistory()
+
   async function handleSubmit() {
     try {
       setError("");
       setLoading(true);
       await login(email, password);
-      console.log( currentUser.uid )
+      if(adminUsers.includes(currentUser.uid)){
+        console.log("Admin logged in")
+      }
+      // console.log( currentUser.uid )
+      history.push('/')
     } catch {
       setError("Failed to log in");
     }
