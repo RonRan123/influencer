@@ -13,6 +13,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 
 import DeleteController from './crud_helpers/DeleteController';
 import { useComment } from '../../context/CommentContext'
+import { useAuth } from "../authentication/context/AuthContext"
 
 /**
  * Prop displaying a comment on a forum or blog post.
@@ -22,6 +23,7 @@ import { useComment } from '../../context/CommentContext'
 function CommentItem({commentItem}) {
     const [deleteMode, setDeleteMode] = useState(false)
     const { setComments } = useComment()
+    const { isAdmin } = useAuth() 
 
     const cardStyle={
         width:"850px",
@@ -39,13 +41,32 @@ function CommentItem({commentItem}) {
         setDeleteMode(dMode => !dMode)
     }
 
+    const deleteButton = () =>{
+        return(
+            <>
+            {!deleteMode
+                ?<div className="edit-delete-container">
+                        <IconButton onClick={handleDeleteMode}><DeleteIcon/></IconButton>
+                </div>
+                :<DeleteController 
+                    forumItem={commentItem} 
+                    setAllThreads={setComments} 
+                    handleCancel={handleDeleteMode}
+                    restUrl={'http://localhost:8080/comments/delete'}
+                    idParam={"commentId"}
+                />
+            }
+          </>
+        )
+    }
+
     const iconButtonStyle={
         margin:0,
         padding:"2px"
     }
     return (
         <div className="comment-item-container">       
-            <Card style={cardStyle}>
+            <Card style={{...cardStyle, width:isAdmin()?"850px":"900px"}}>
                 <CardContent classes={{root:"card-root"}} >
                     <p className="forum">{commentItem.content}</p>
                     <Divider/>
@@ -63,18 +84,7 @@ function CommentItem({commentItem}) {
                 </CardContent>
             </Card>
 
-            {!deleteMode
-              ?<div className="edit-delete-container">
-                        <IconButton onClick={handleDeleteMode}><DeleteIcon/></IconButton>
-               </div>
-              :<DeleteController 
-                    forumItem={commentItem} 
-                    setAllThreads={setComments} 
-                    handleCancel={handleDeleteMode}
-                    restUrl={'http://localhost:8080/comments/delete'}
-                    idParam={"commentId"}
-                />
-            }
+            {isAdmin() && deleteButton()}
         </div>
     )
 }

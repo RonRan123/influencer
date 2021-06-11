@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
+import adminUsers from '../adminUsers'
 
 const AuthContext = createContext();
 
@@ -30,6 +31,8 @@ export function AuthProvider({ children }) {
 
   function logout() {
     return auth.signOut();
+  function isAdmin() {
+    return adminUsers.includes(currentUser.uid)
   }
 
   useEffect(() => {
@@ -46,6 +49,7 @@ export function AuthProvider({ children }) {
     login,
     signup,
     logout,
+    isAdmin
   };
 
   return (

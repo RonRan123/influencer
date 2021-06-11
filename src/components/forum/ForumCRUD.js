@@ -75,6 +75,7 @@ function ForumCrud() {
                     <Button style={postButtonStyle}>Post</Button>
                 </div>
             }
+        
         </>
     )
 }
