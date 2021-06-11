@@ -16,6 +16,7 @@ import axios from 'axios'
 
 //Context hook for interacting with forum data
 import { useForum } from '../../context/ForumContext' 
+import { useAuth } from "../authentication/context/AuthContext"
 
 /**
  * List of all forum posts. New forum posts can be started by users. 
@@ -25,13 +26,15 @@ import { useForum } from '../../context/ForumContext'
 function ForumList() {
     const {path, url} = useRouteMatch()
     const { allThreads, setAllThreads, fetchAllThreads } = useForum()
+    const { currentUser } = useAuth()
 
     return (
         <> 
             <Switch>
                 <Route exact path={path}>
-                    <ForumCRUD />
-          
+                    {currentUser && 
+                        <ForumCRUD />
+                    }
                     {allThreads.length > 0
                         ?
                         <div className="forum-frame">

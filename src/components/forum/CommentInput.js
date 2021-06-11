@@ -15,7 +15,6 @@ import { useComment } from '../../context/CommentContext'
 function CommentInput() {
     const { threadId } = useParams()
     const { addComment } = useComment()
-
     const handleSubmit = (e) => {
         e.preventDefault()
         const comment = document.getElementById("comment-input").value

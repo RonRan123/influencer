@@ -19,6 +19,7 @@ import axios from 'axios'
 
 //Context
 import { useForum } from '../../context/ForumContext'
+import { useAuth } from "../authentication/context/AuthContext"
 
 /**
  * Component for displaying an individual forum post. Is a child of ForumList.js
@@ -28,18 +29,19 @@ import { useForum } from '../../context/ForumContext'
  */
 function ForumItem({forumItem}) {
     const history = useHistory()
+    const { isAdmin } = useAuth()
     const { setAllThreads } = useForum()//setAllThreads from ForumContext used to update forum array
     const [editMode, setEditMode] = useState(false)
     const [deleteMode, setDeleteMode] = useState(false)
     let match = useRouteMatch()
-    const cardStyle={
-        width:"850px",
-        borderRadius:"5px 0px 0px 5px",
-    }
+
     const editInputStyle={
         fontFamily:"Martel",
         fontWeight:"bold",
         width:"100%",
+    }
+    const cardStyle={
+        borderRadius:"5px 0px 0px 5px",
     }
     const getNumComments = () =>{
         //will be used to get number of comments relating to forum post
@@ -77,9 +79,37 @@ function ForumItem({forumItem}) {
         setDeleteMode(deleteMode => !deleteMode)
     }
 
+    const editAndDeleteButtons = () =>{
+        return(
+        <>
+            {!deleteMode
+                ?<div className="edit-delete-container">
+                    {!editMode 
+                    ?   <>
+                            <IconButton onClick={handleEdit}><EditIcon/></IconButton>
+                            <IconButton onClick={handleDeleteMode}><DeleteIcon/></IconButton>
+                        </>
+                    :   <>
+                            <IconButton onClick={handleEdit}><CancelIcon/></IconButton>
+                            <IconButton onClick={submitEdit}><CheckCircleIcon/></IconButton>
+                        </>
+                    }
+                </div>
+            : <DeleteController 
+                    forumItem={forumItem} 
+                    setAllThreads={setAllThreads} 
+                    handleCancel={handleDeleteMode}
+                    restUrl={'http://localhost:8080/forums/delete'}
+                    idParam={"forumId"}
+                />
+            }
+       </>
+       )
+    }
+
     return (
         <div className="forum-item-container">       
-            <Card style={cardStyle}>
+            <Card style={{...cardStyle, width:isAdmin() ? "850px" : "900px"}}>
                 {!editMode
                  ?<CardActionArea onClick={handleThreadRoute}>
                     <CardContent classes={{root:"card-root"}} >
@@ -101,27 +131,7 @@ function ForumItem({forumItem}) {
                 </CardContent>
                 }
             </Card>
-            {!deleteMode
-            ?<div className="edit-delete-container">
-                {!editMode
-                ?   <>
-                        <IconButton onClick={handleEdit}><EditIcon/></IconButton>
-                        <IconButton onClick={handleDeleteMode}><DeleteIcon/></IconButton>
-                    </>
-                :   <>
-                        <IconButton onClick={handleEdit}><CancelIcon/></IconButton>
-                        <IconButton onClick={submitEdit}><CheckCircleIcon/></IconButton>
-                    </>
-                }
-            </div>
-           : <DeleteController 
-                forumItem={forumItem} 
-                setAllThreads={setAllThreads} 
-                handleCancel={handleDeleteMode}
-                restUrl={'http://localhost:8080/forums/delete'}
-                idParam={"forumId"}
-            />
-          }
+            {isAdmin() && editAndDeleteButtons()}
         </div>
     )
 }
