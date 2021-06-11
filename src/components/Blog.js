@@ -7,10 +7,12 @@ import '../css/Blog.css'
 import Masonry from 'react-masonry-css'
 import {useRouteMatch, Switch, Route, useHistory} from "react-router-dom"
 import {BlogPostContext} from '../context/BlogPostContext'
+import { useAuth } from "./authentication/context/AuthContext";
 
 function Blog(){
     // const [posts, setPosts] = useState([]);
     const { posts } = useContext(BlogPostContext);
+    const { isAdmin } = useAuth()
     const match = useRouteMatch();
     const history = useHistory();
     // const [input, setInput] = useState("canyon");
@@ -57,9 +59,11 @@ function Blog(){
                     {/* {posts && posts.map(p => <Post info={p} />)} */}
                     {/* <TextField id="search-keyword" label="Enter Search" onChange={e => setInput(e.target.value)} defaultValue="canyon"/> */}
                     {/* <Button onClick={() => getSomePhotos()}>Search</Button> */}
+                    {isAdmin() &&
                     <div style= {{display:"flex", justifyContent:"center"}}>
                         <Button variant="contained" onClick={() => history.push(`${match.path}/addBlogPost`)}>Add Blog Post</Button>
                     </div>
+                    }
                     <br></br>
                     <Masonry
                         breakpointCols={breakpoints}
