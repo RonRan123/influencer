@@ -31,8 +31,11 @@ export function AuthProvider({ children }) {
 
   function logout() {
     return auth.signOut();
+  }
   function isAdmin() {
-    return adminUsers.includes(currentUser.uid)
+    if(currentUser)
+      return adminUsers.includes(currentUser.uid)
+    return false
   }
 
   useEffect(() => {
