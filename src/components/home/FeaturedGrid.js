@@ -38,17 +38,7 @@ function FeaturedGrid({blogPost}) {
             console.log("oops")
         }
         else{
-            const sorted = [...posts].sort(function(a, b) {
-                var keyA = new Date(a.date),
-                  keyB = new Date(b.date);
-                // Compare the 2 dates
-                if (keyA < keyB) return -1;
-                if (keyA > keyB) return 1;
-                return 0;
-            });
-            setRecent(sorted);
-            console.log(sorted[0]);
-            console.log(recent);
+            setRecent(posts);
         }
     }, [posts])
     return (

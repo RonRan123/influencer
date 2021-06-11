@@ -2,16 +2,17 @@ import React, {useEffect, useState, useContext} from "react";
 import { Button, Container, TextField } from "@material-ui/core";
 import PostCard from "./PostCard"
 import ShowPost from "./ShowPost.js"
-import ImageCard from "./ImageCard"
+import AddCard from "./AddCard"
 import '../css/Blog.css'
 import Masonry from 'react-masonry-css'
-import {useRouteMatch, Switch, Route} from "react-router-dom"
+import {useRouteMatch, Switch, Route, useHistory} from "react-router-dom"
 import {BlogPostContext} from '../context/BlogPostContext'
 
 function Blog(){
     // const [posts, setPosts] = useState([]);
     const { posts } = useContext(BlogPostContext);
     const match = useRouteMatch();
+    const history = useHistory();
     // const [input, setInput] = useState("canyon");
     // const [random, setRandom] = useState(false);
 
@@ -56,6 +57,9 @@ function Blog(){
                     {/* {posts && posts.map(p => <Post info={p} />)} */}
                     {/* <TextField id="search-keyword" label="Enter Search" onChange={e => setInput(e.target.value)} defaultValue="canyon"/> */}
                     {/* <Button onClick={() => getSomePhotos()}>Search</Button> */}
+                    <div style= {{display:"flex", justifyContent:"center"}}>
+                        <Button variant="contained" onClick={() => history.push(`${match.path}/addBlogPost`)}>Add Blog Post</Button>
+                    </div>
                     <br></br>
                     <Masonry
                         breakpointCols={breakpoints}
@@ -66,6 +70,9 @@ function Blog(){
                     {posts && posts.map( (post) => <PostCard key={post.doc_id} info={post}/>)}
                     </Masonry>
                 </Container>
+            </Route>
+            <Route path={`${match.path}/addBlogPost`}>
+                <AddCard />
             </Route>
             <Route path={`${match.path}/:postID`}>
                 <ShowPost/>

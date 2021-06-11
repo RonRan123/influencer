@@ -7,6 +7,7 @@ import { useAuth } from "../authentication/context/AuthContext"
 import BlogCommentList from './BlogCommentList'
 
 export default function ViewPost({props}) {
+  // const [liked, setLiked] = useContext('false');
   const { isAdmin } = useAuth()
   const handleLike = () => {
     console.log("liked");
