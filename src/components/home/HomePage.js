@@ -5,6 +5,7 @@ import Footer from './Footer'
 import LogIn from "../authentication/LogIn"
 import SignUp from '../authentication/SignUp'
 import ShopItems from '../ShopItems'
+import ShopCart from '../ShopCart1'
 import NavigationDrawer from './NavigationDrawer'
 import Blog from '../Blog'
 import '../../css/home-page.css'
@@ -17,7 +18,7 @@ import {
 
 //testing
 import ForumList from '../forum/ForumList'
-import { home, blog, forum, shop, login, signup } from './routerPaths'
+import { home, blog, forum, shop, login, cart, signup } from './routerPaths'
 import AvatorIcon from '../../icons/avatar.svg'
 
 
@@ -66,6 +67,9 @@ function HomePage() {
                 </Route>
                 <Route path={login}>
                     <LogIn/>
+                </Route>
+                <Route path={cart}>
+                    <ShopCart/>
                 </Route>
                 <Route path={signup}>
                     <SignUp/>
